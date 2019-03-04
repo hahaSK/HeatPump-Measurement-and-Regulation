@@ -1,3 +1,10 @@
+# CMake Generated files
+cmake-build-debug
+
+# IDE
+.vs
+.idea
+
 # Prerequisites
 *.d
 
