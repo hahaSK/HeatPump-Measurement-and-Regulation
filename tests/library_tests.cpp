@@ -22,3 +22,8 @@ TEST(CalculatePhe, Temperatures)
 {
   ASSERT_DOUBLE_EQ(CalculatePhe(150, 1.005, 20, 15), 753.75);
 }
+
+TEST(CalculatePe, Basic)
+{
+  ASSERT_DOUBLE_EQ(CalculatePe(230, 2), 460);
+}
