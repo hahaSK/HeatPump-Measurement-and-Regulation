@@ -28,4 +28,12 @@ double CalculatePhe(double Qm, double Cp, double DeltaT);
  */
 double CalculatePhe(double Qm, double Cp, double T1, double T2);
 
+/**
+ * Calculates the (consumed) Electrical capacity
+ * @param U Voltage
+ * @param I Current
+ * @return Electrical Capacity
+ */
+double CalculatePe(double U, double I);
+
 #endif

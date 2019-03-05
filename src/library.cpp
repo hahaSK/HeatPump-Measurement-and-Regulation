@@ -19,3 +19,8 @@ double CalculatePhe(double Qm, double Cp, double T1, double T2)
 {
   return Qm * Cp * (T1 - T2);
 }
+
+double CalculatePe(double U, double I)
+{
+  return U * I;
+}
