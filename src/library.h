@@ -12,7 +12,7 @@ double CalculateCOP(double Phe, double Pe);
 /**
  * Calculates the Heat Capacity of given substance
  * @param Qm mass flow rate [kg/s]
- * @param Cp thermal capacity of given substance [J/KgK]
+ * @param Cp specific thermal capacity of given substance [J/KgK]
  * @param DeltaT temperature difference [K]
  * @return <strong>Phe</strong> - Heat Capacity [W]
  */
@@ -21,7 +21,7 @@ double CalculatePhe(double Qm, double Cp, double DeltaT);
 /**
  * Calculates the Heat Capacity ofc given substance
  * @param Qm mass flow rate [kg/s]
- * @param Cp thermal capacity of given substance [J/KgK]
+ * @param Cp specific thermal capacity of given substance [J/KgK]
  * @param T1 temperature [T] or [°C]
  * @param T2 temperature [T] or [°C]
  * @return <strong>Phe</strong> - Heat Capacity [W]
