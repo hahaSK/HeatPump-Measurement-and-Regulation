@@ -22,7 +22,7 @@ namespace MainGUI
         /// <param name="Cp">specific thermal capacity of given substance [J/KgK]</param>
         /// <param name="DeltaT">temperature difference [K]</param>
         /// <returns>Heat Capacity [W]. <see cref="T:null" /> if DLL is not found.</returns>
-        public static double? CalculatePhe(double Qm, double Cp, double DeltaT)
+        public double? CalculatePhe(double Qm, double Cp, double DeltaT)
         {
             return COPandPCalcLib.CalcPhe(Qm, Cp, DeltaT);
         }
@@ -35,7 +35,7 @@ namespace MainGUI
         /// <param name="T1">temperature [T] or [°C]</param>
         /// <param name="T2">temperature [T] or [°C]</param>
         /// <returns>- Heat Capacity [W]. <see cref="T:null" /> if DLL is not found.</returns>
-        public static double? CalculatePhe(double Qm, double Cp, double T1, double T2)
+        public double? CalculatePhe(double Qm, double Cp, double T1, double T2)
         {
             return COPandPCalcLib.CalcPhe(Qm, Cp, T1, T2);
         }
@@ -46,7 +46,7 @@ namespace MainGUI
         /// <param name="U">Voltage</param>
         /// <param name="I">Current</param>
         /// <returns>Electrical capacity. <see cref="T:null" /> if DLL is not found.</returns>
-        public static double? CalculatePe(double U, double I)
+        public double? CalculatePe(double U, double I)
         {
             return COPandPCalcLib.CalcPe(U, I);
         }

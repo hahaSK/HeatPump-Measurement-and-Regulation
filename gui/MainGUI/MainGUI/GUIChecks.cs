@@ -22,5 +22,29 @@ namespace MainGUI
             result = 0;
             return false;
         }
+
+        public void ReplaceDot(object sender, TextChangedEventArgs e)
+        {
+            if (!(sender is TextBox tb))
+            {
+                ErrorPrinting.PrintError("Replace Dot " + sender.ToString() + " not a TextBox!");
+                return;
+            }
+
+           
+            using (tb.DeclareChangeBlock())
+            {
+                foreach (var c in e.Changes)
+                {
+                    if (c.AddedLength == 0) continue;
+                    tb.Select(c.Offset, c.AddedLength);
+                    if (tb.SelectedText.Contains("."))
+                    {
+                        tb.SelectedText = tb.SelectedText.Replace('.', ',');
+                    }
+                    tb.Select(c.Offset + c.AddedLength, 0);
+                }
+            }
+        }
     }
 }
