@@ -13,3 +13,19 @@ D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\D
 D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\MainGUI.csproj.CoreCompileInputs.cache
 D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\MainGUI.exe
 D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\MainGUI.pdb
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\Microsoft.Expression.Prototyping.SketchControls.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\Simple Styles.baml
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\App.baml
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\MainGUI.csproj.CopyComplete
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\Microsoft.Expression.Drawing.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\de\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\es\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\fr\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\it\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\ja\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\ko\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\ru\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\bin\Debug\zh-Hant\Microsoft.Expression.Drawing.resources.dll
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\CompareWindow.g.cs
+D:\HeatPumpProgram\HeatPump-Measurement-and-Regulation\gui\MainGUI\MainGUI\obj\Debug\CompareWindow.baml
