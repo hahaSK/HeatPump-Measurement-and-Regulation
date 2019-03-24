@@ -39,10 +39,10 @@
                     d:IsHidden="True">
                 <TextBox x:Name="CondenserT1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="20"
                          VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserT1_OnTextChanged" />
-                <Label Content="T1 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <Label Content="Tin,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" />
                 <TextBox x:Name="CondenserT2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="15"
                          VerticalAlignment="Top" Width="45.237" Canvas.Top="111.637" TextChanged="CondenserT2_OnTextChanged" />
-                <Label Content="T2 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="85.677" />
+                <Label Content="Tout,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="85.677" />
             </Canvas>
             <Canvas x:Name="DeltaTCanvas" Height="48.96" Canvas.Top="71.333" Width="45.237">
                 <TextBox x:Name="CondenserDeltaT" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="5"
