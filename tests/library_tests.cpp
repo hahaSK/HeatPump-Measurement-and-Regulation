@@ -1,5 +1,5 @@
 //
-// Created by Juraj Lahvička on 5.3.2019.
+// Created by Juraj Lahvička
 //
 
 #include "googletest-master/googletest/include/gtest/gtest.h"
