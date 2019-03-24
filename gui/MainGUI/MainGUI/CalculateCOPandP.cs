@@ -50,5 +50,10 @@ namespace MainGUI
         {
             return COPandPCalcLib.CalcPe(U, I);
         }
+
+        public double? CalculateAirCp(double ambientTemp)
+        {
+            return COPandPCalcLib.CalculateAirCp(ambientTemp);
+        }
     }
 }

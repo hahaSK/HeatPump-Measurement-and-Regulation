@@ -13,6 +13,8 @@ namespace MainGUI
         private static extern double CalculatePhe(double Qm, double Cp, double T1, double T2);
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double CalculatePe(double U, double I);
+        [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double GetAirCp(double temperature);
 
         /// <summary>
         /// Calculates the COP (Coefficient of Performance)
@@ -91,6 +93,24 @@ namespace MainGUI
             {
                 ErrorPrinting.PrintError(dllNotFound.Message);
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Calculates the specific heat of air.
+        /// </summary>
+        /// <param name="temperature">ambient temperature</param>
+        /// <returns>specific heat capacity [J]</returns>
+        public static double? CalculateAirCp(double temperature)
+        {
+            try
+            {
+                return GetAirCp(temperature);
+            }
+            catch (DllNotFoundException dllNotFound)
+            {
+                ErrorPrinting.PrintError(dllNotFound.Message);
+                throw;
             }
         }
     }
