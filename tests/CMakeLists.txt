@@ -24,6 +24,9 @@ add_executable(${PROJECT_NAME}
         ../tests/library_tests.cpp
         ../src/library.cpp
         ../src/library.h
+        ../tests/CpTests.cpp
+        ../src/Cp.cpp
+        ../src/Cp.h
         )
 
 target_link_libraries(${PROJECT_NAME}
