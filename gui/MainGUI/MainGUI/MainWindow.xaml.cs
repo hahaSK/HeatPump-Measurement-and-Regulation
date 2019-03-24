@@ -15,7 +15,7 @@ namespace MainGUI
         private CompareWindow _compareWindow;
 
         private readonly string[] _compressorOptions = {"Capacity", "U, I"};
-        private readonly string[] _condenseDataOptions = {"Delta T", "T1, T2", "P"};
+        private readonly string[] _condenseDataOptions = {"Delta T", "Tin,W ; Tout,W", "P"};
         private readonly string[] _condenserFlowUnitsOptions = {"m3/h", "m3/s"};
 
         private bool _calculationDone;
@@ -88,7 +88,7 @@ namespace MainGUI
             if (CondenserPCanvas.Visibility == Visibility.Visible)
             {
                 if (!guiChecks.TryGetValue(CondenserP, out double condenserP)) return false;
-                _systemCalculation.CondData = new CondenserData(condenserP);
+                _systemCalculation.CondenserData = new CoilData(condenserP);
                 return true;
             }
 
@@ -103,12 +103,12 @@ namespace MainGUI
             {
                 case Visibility.Visible:
                     if (!guiChecks.TryGetValue(CondenserDeltaT, out double condenserDeltaT)) return false;
-                    _systemCalculation.CondData = new CondenserData(condenserV, condenserDeltaT, null, null);
+                    _systemCalculation.CondenserData = new CoilData(condenserV, condenserDeltaT, null, null);
                     break;
                 case Visibility.Hidden:
                     if (!guiChecks.TryGetValue(CondenserT1, out double condenserT1) ||
                         !guiChecks.TryGetValue(CondenserT2, out double condenserT2)) return false;
-                    _systemCalculation.CondData = new CondenserData(condenserV, null, condenserT1, condenserT2);
+                    _systemCalculation.CondenserData = new CoilData(condenserV, null, condenserT1, condenserT2);
                     break;
             }
 

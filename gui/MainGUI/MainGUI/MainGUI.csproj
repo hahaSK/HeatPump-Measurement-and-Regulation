@@ -78,6 +78,7 @@
     <Compile Include="CompareWindow.xaml.cs">
       <DependentUpon>CompareWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constants.cs" />
     <Compile Include="ElectricalAppliance.cs" />
     <Compile Include="SystemCalculation.cs" />
     <Page Include="CompareWindow.xaml">
@@ -93,7 +94,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CalculateCOPandP.cs" />
-    <Compile Include="Condenser.cs" />
+    <Compile Include="Coil.cs" />
     <Compile Include="COPandPCalcLib.cs" />
     <Compile Include="ErrorPrinting.cs" />
     <Compile Include="GUIChecks.cs" />

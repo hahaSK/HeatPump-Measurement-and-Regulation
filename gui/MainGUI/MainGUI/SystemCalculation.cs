@@ -12,10 +12,10 @@ namespace MainGUI
             internal double Pe;
         }
 
-        public CondenserData CondData;
+        public CoilData CondenserData;
         public ElectricalApplianceData CompressorData;
 
-        private readonly Condenser _condenser = new Condenser();
+        private readonly Coil _condenser = new Coil();
         private readonly ElectricalAppliance _compressor = new ElectricalAppliance();
         private readonly CalculateCOPandP _calculateCoPandP = new CalculateCOPandP();
 
@@ -31,11 +31,7 @@ namespace MainGUI
         internal SystemData? CalculateSystem()
         {
             // Condenser
-            double CondP;
-            if (CondData.P != null)
-                CondP = CondData.P.Value;
-
-            CondP = _condenser.CalcCondenser(CondData);
+            double CondP = CondenserData.P ?? _condenser.CalcCoil(CondenserData);
 
             // Electrical appliances
             // TODO resize when Electrical appliance is destroyed
