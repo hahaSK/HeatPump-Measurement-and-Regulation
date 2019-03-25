@@ -7,6 +7,9 @@ project(runTests)
 #If tests very run in VS the linker was throwing an error because of the library was already defined but dll
 set(gtest_force_shared_crt TRUE)
 
+# create exacutables in src/bin
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../tests/bin")
+
 #Google tests
 add_subdirectory(../tests/googletest-master ${CMAKE_CURRENT_SOURCE_DIR}/../tests/bin)
 include_directories(../tests/googletest-master/googletest/include)
