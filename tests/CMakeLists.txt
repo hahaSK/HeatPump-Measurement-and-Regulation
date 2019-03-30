@@ -30,6 +30,9 @@ add_executable(${PROJECT_NAME}
         ../tests/CpTests.cpp
         ../src/Cp.cpp
         ../src/Cp.h
+        ../src/AirRho.cpp
+        ../src/AirRho.h
+        ../tests/AirRho_tests.cpp
         )
 
 target_link_libraries(${PROJECT_NAME}
