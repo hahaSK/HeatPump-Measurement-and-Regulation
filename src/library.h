@@ -3,6 +3,8 @@
 
 #define DllEXPORT extern "C" __declspec(dllexport)
 
+#define DllEXPORT extern "C" __declspec(dllexport)
+
 /**
  * Calculates the COP (Coefficient of Performance)
  * @param Phe Heat Capacity [W]
