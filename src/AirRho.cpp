@@ -11,7 +11,7 @@ double GetAirRho(double h, double humidity, double airTemperature)
   const double L{6.5}; // K/km
   const double p0{101.325}; // kPa
   const double g{9.80665}; // m/s2
-  const double Mair{28.9644}; // kg/kmol
+  const double Mair{0.0289644}; // kg/mol
   const double R{8.31447}; // J/mol K
   const double Mwater{0.018016}; // kg/mol
 
@@ -19,9 +19,9 @@ double GetAirRho(double h, double humidity, double airTemperature)
 
   double Th = T0 - (L / 1000) * h;
 
-  double division = (g * (Mair / 1000) * h) / (R * Th);
+  double division = (g * Mair * h) / (R * Th);
 
-  double p = (p0 / 1000) * exp(-division);
+  double p = (p0 * 1000) * exp(-division);
 
   if (humidity < 1) return (p * Mair) / (R * T);
   else
