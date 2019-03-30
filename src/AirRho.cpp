@@ -19,15 +19,15 @@ double GetAirRho(double h, double humidity, double airTemperature)
 
   double Th = T0 - (L / 1000) * h;
 
-  double division = (g * (Mair / 100) * h) / (R * Th);
+  double division = (g * (Mair / 1000) * h) / (R * Th);
 
-  double p = (p0 / 100) * exp(-division);
+  double p = (p0 / 1000) * exp(-division);
 
   if (humidity < 1) return (p * Mair) / (R * T);
   else
   {
     double psat = 6.1078 * pow(10, ((7.5 * airTemperature) / (237.3 + airTemperature)));
-    double pv = (humidity / 100) * psat;
+    double pv = (humidity / 100) * psat * 100;
     double pd = p - pv;
     return (pd * Mair + pv * Mwater) / (R * T);
   }
