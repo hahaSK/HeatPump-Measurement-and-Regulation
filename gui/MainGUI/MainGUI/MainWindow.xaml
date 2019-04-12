@@ -15,7 +15,7 @@
         <Label Content="COP" HorizontalAlignment="Left" Margin="11.913,522.9,0,0" VerticalAlignment="Top" Width="54.667"
                RenderTransformOrigin="0.542,3.808" />
 
-        <Canvas x:Name="CompressorInputCanvas" Margin="326.5,40.5,616.5,768.5" Width="73">
+        <Canvas x:Name="CompressorInputCanvas" Margin="462.603,41.5,480.396,767.5" Width="73">
             <ComboBox x:Name="CompressorInputOptions" Height="20" Width="73"
                       SelectionChanged="CompressorInputOptions_SelectionChanged" SelectedIndex="0" />
             <Canvas x:Name="CompressorCapacityCanvas" Height="43.46" Canvas.Top="25" Width="71" d:IsHidden="False">
@@ -32,7 +32,7 @@
             </Canvas>
         </Canvas>
 
-        <Canvas x:Name="CondenserCanvas" Margin="685.75,183.04,174,625.96">
+        <Canvas x:Name="CondenserCanvas" Margin="773.854,184.04,85.896,624.96">
             <ComboBox x:Name="CondDataOptions" SelectionChanged="CondDataOptions_SelectionChanged" SelectedIndex="0"
                       Height="20" Width="66" />
             <Canvas x:Name="T1T2Canvas" Height="134.637" Canvas.Left="5.693" Canvas.Top="25" Width="45.237"
@@ -49,7 +49,7 @@
                          VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" />
                 <Label Content="∆T [-]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
-            <Canvas x:Name="CondenserVCanvas" Height="48.961" Canvas.Left="101.693" Canvas.Top="71.333" Width="54.557">
+            <Canvas x:Name="CondenserVCanvas" Height="48.961" Canvas.Left="70.693" Canvas.Top="71.333" Width="54.557">
                 <TextBox x:Name="CondenserV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2"
                     VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="CondenserV_TextChanged" />
                 <ComboBox x:Name="CondFlowUnitOptions" SelectionChanged="CondDataOptions_SelectionChanged" SelectedIndex="0"
@@ -62,7 +62,7 @@
                 <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
         </Canvas>
-        <Canvas x:Name="SystemCanvas" Margin="82.1,131,335.25,543.167">
+        <Canvas x:Name="SystemCanvas" Margin="218.204,132,199.146,542.167">
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="143.5" Stroke="Black"
                        VerticalAlignment="Top" Width="80" Canvas.Left="58.9" Canvas.Top="87" />
             <Path Data="M145.83333,521.5 L130,500.5 188.5,477.5 123.5,456.5 183,436 126,415.5 173.5,390.5 154,379"
@@ -93,11 +93,11 @@
                   Stretch="Fill" Stroke="Red" VerticalAlignment="Top" Width="6.938" StrokeThickness="0.5"
                   Canvas.Left="165.525" Canvas.Top="26.437" />
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="143.5" Stroke="Black"
-                       VerticalAlignment="Top" Width="80" Canvas.Left="460.066" Canvas.Top="87" />
+                       VerticalAlignment="Top" Width="80" Canvas.Left="413.4" Canvas.Top="87.433" />
             <Path
                 Data="M252.08501,435.33301 L183,436 127.16792,456.16626 182.45951,477.92692 125.835,500.49943 182.835,518.49967 250.58501,518.58271"
                 HorizontalAlignment="Left" Height="84.25" Stretch="Fill" VerticalAlignment="Top" Width="127.25"
-                Canvas.Left="471.4" Canvas.Top="114">
+                Canvas.Left="424.734" Canvas.Top="114.433">
                 <Path.Stroke>
                     <LinearGradientBrush EndPoint="0.529,0.973" StartPoint="0.5,0">
                         <GradientStop Color="#FFA00000" Offset="0" />
@@ -121,9 +121,9 @@
                 </Path.RenderTransform>
             </Path>
             <Path Data="M533.75,379.75 L534.5,319.5 340,320" HorizontalAlignment="Left" Height="61.25" Stretch="Fill"
-                  VerticalAlignment="Top" Width="195.5" Stroke="#FFA00000" Canvas.Left="303.9" Canvas.Top="27.5" />
+                  VerticalAlignment="Top" Width="151.166" Stroke="#FFA00000" Canvas.Left="303.9" Canvas.Top="27.5" />
             <Path Data="M535.41667,522 L536.16605,596.16766 359.57164,595.83399" HorizontalAlignment="Left"
-                  Height="75.167" Stretch="Fill" VerticalAlignment="Top" Width="177.667" Stroke="#FF4225F3"
+                  Height="75.5" Stretch="Fill" VerticalAlignment="Top" Width="131.666" Stroke="#FF4225F3"
                   Canvas.Left="323.4" Canvas.Top="230" />
             <Rectangle Fill="#FFF4F5F5" HorizontalAlignment="Left" Height="29.166" VerticalAlignment="Top"
                        Width="84.833" Stroke="Black" Canvas.Left="239.9" Canvas.Top="289.667" />
@@ -183,5 +183,38 @@
         <Path Data="M3.5,513 L1014.1,517.1" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="4.9" Margin="0,513,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="1016"/>
         <Label Content="Results" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,487.04,0,0" FontWeight="Bold" FontSize="14" />
         <Button x:Name="ShowCompareWindowButton" Content="Compare" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="685.75,533.91,0,0" Click="ShowCompareWindowButton_Click"/>
+        <Canvas x:Name="EvaporatorCanvas" HorizontalAlignment="Left" Height="215.667" Margin="97.104,184.04,0,0" VerticalAlignment="Top" Width="338.333">
+            <CheckBox x:Name="CalculateEvaporatorChkbox" Content=" Evaporator" HorizontalAlignment="Left" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Top" Width="76.92" Canvas.Left="103.413" Canvas.Top="10" Click="CalculateEvaporatorChkbox_Clicked"/>
+            <Canvas x:Name="EvaporatorPCanvas" Height="48.96" Canvas.Left="283.095" Canvas.Top="75.999" Width="45.238">
+                <TextBox x:Name="EvaporatorResultP" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" IsReadOnly="True"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" Canvas.Left="0.001" />
+                <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Canvas>
+            <Canvas x:Name="EvaporatorTCanvas" Height="137.707" Canvas.Top="30.96" Width="45.237" Canvas.Left="63">
+                <TextBox x:Name="EvaporatorTin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="16"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" />
+                <Label Content="Tin,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox x:Name="EvaporatorTout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="10"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="104.707" TextChanged="CondenserDeltaT_TextChanged" />
+                <Label Content="Tout,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="78.747" />
+            </Canvas>
+            <Canvas x:Name="EvaporatorVCanvas" Height="48.961" Canvas.Top="75.999" Width="54.557">
+                <TextBox x:Name="EvaporatorV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000"
+                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="CondenserV_TextChanged" />
+                <ComboBox x:Name="EvapFlowUnitOptions" SelectionChanged="CondDataOptions_SelectionChanged" SelectedIndex="0"
+                    Height="22" Canvas.Left="-79.443" Canvas.Top="25.961" Width="66" />
+                <Label Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </Canvas>
+            <Canvas x:Name="EvaporatorHumidityCanvas" Height="48.96" Width="45.238">
+                <TextBox x:Name="EvaporatorHumidity" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" Canvas.Left="0.001" />
+                <Label Content="Humidity [%]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-16" />
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="HeightOverSeaCanvas" Margin="97.104,114.05,873.658,645.99">
+            <TextBox x:Name="HeightOverSea" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
+                VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" Canvas.Left="0.001" />
+            <Label Content="Height [m]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-11" />
+        </Canvas>
     </Grid>
 </Window>

@@ -27,16 +27,16 @@ namespace MainGUI
         private CalculateCOPandP calculateCOPandP = new CalculateCOPandP();
 
         // number of Electrical Appliance instances (number of Electrical appliances)
-        public static int numberOfInstances = 0;
+        public static int NumberOfInstances = 0;
 
         public ElectricalAppliance()
         {
-            Interlocked.Increment(ref numberOfInstances);
+            Interlocked.Increment(ref NumberOfInstances);
         }
 
         ~ElectricalAppliance()
         {
-            Interlocked.Decrement(ref numberOfInstances);
+            Interlocked.Decrement(ref NumberOfInstances);
         }
 
         /// <summary>

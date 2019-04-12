@@ -4,17 +4,24 @@ using System.Runtime.InteropServices;
 namespace MainGUI
 {
     public static class COPandPCalcLib
-    {       
+    {
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double CalculateCOP(double Phe, double Pe);
+
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double CalculatePhe(double Qm, double Cp, double DeltaT);
+
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double CalculatePhe(double Qm, double Cp, double T1, double T2);
+
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double CalculatePe(double U, double I);
+
         [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
         private static extern double GetAirCp(double temperature);
+
+        [DllImport("COPandPCalc", CallingConvention = CallingConvention.Cdecl)]
+        private static extern double GetAirRho(double h, double humidity, double airTemperature);
 
         /// <summary>
         /// Calculates the COP (Coefficient of Performance)
@@ -87,7 +94,6 @@ namespace MainGUI
             try
             {
                 return CalculatePe(U, I);
-
             }
             catch (DllNotFoundException dllNotFound)
             {
@@ -106,6 +112,26 @@ namespace MainGUI
             try
             {
                 return GetAirCp(temperature);
+            }
+            catch (DllNotFoundException dllNotFound)
+            {
+                ErrorPrinting.PrintError(dllNotFound.Message);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Calculate the air density
+        /// </summary>
+        /// <param name="h">height over see</param>
+        /// <param name="humidity">humidity in %</param>
+        /// <param name="temperature">air temperature in °C</param>
+        /// <returns>Calculated density of the air</returns>
+        public static double? CalculateAirRho(double h, double humidity, double temperature)
+        {
+            try
+            {
+                return GetAirRho(h, humidity, temperature);
             }
             catch (DllNotFoundException dllNotFound)
             {

@@ -51,9 +51,26 @@ namespace MainGUI
             return COPandPCalcLib.CalcPe(U, I);
         }
 
+        /// <summary>
+        /// Calculate Heat capacity of air.
+        /// </summary>
+        /// <param name="ambientTemp"></param>
+        /// <returns>Calculated heat capacity</returns>
         public double? CalculateAirCp(double ambientTemp)
         {
             return COPandPCalcLib.CalculateAirCp(ambientTemp);
+        }
+
+        /// <summary>
+        /// Calculate air density
+        /// </summary>
+        /// <param name="h">height over sea</param>
+        /// <param name="humidity">in %</param>
+        /// <param name="temperature">ambient temperature [°C]</param>
+        /// <returns></returns>
+        public double? CalculateAirRho(double h, double humidity, double temperature)
+        {
+            return COPandPCalcLib.CalculateAirRho(h, humidity, temperature);
         }
     }
 }

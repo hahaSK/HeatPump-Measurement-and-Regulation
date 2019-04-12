@@ -1,7 +1,9 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Media3D;
 
 namespace MainGUI
 {
@@ -16,7 +18,7 @@ namespace MainGUI
 
         private readonly string[] _compressorOptions = {"Capacity", "U, I"};
         private readonly string[] _condenseDataOptions = {"Delta T", "Tin,W ; Tout,W", "P"};
-        private readonly string[] _condenserFlowUnitsOptions = {"m3/h", "m3/s"};
+        private readonly string[] _flowUnitsOptions = {"m3/h", "m3/s"};
 
         private bool _calculationDone;
 
@@ -30,10 +32,13 @@ namespace MainGUI
             Thread.CurrentThread.CurrentUICulture = ci;
 
             InitializeComponent();
-            
+
             CompressorInputOptions.ItemsSource = _compressorOptions;
             CondDataOptions.ItemsSource = _condenseDataOptions;
-            CondFlowUnitOptions.ItemsSource = _condenserFlowUnitsOptions;
+            CondFlowUnitOptions.ItemsSource = _flowUnitsOptions;
+            EvapFlowUnitOptions.ItemsSource = _flowUnitsOptions;
+
+            CalculateEvaporatorChkbox_Clicked(this, new RoutedEventArgs());
         }
 
         private void Calc_Click(object sender, RoutedEventArgs e)
@@ -55,6 +60,8 @@ namespace MainGUI
                 return;
 
             SystemCOPResultTextBox.Text = SystemCalculation.GetSysCOP.ToString("F1");
+
+            SetEvaporator();
 
             _calculationDone = true;
         }
@@ -111,6 +118,34 @@ namespace MainGUI
                     _systemCalculation.CondenserData = new CoilData(condenserV, null, condenserT1, condenserT2);
                     break;
             }
+
+            return true;
+        }
+
+        private void SetEvaporator()
+        {
+            if (!CalculateEvaporatorChkbox.IsChecked.HasValue || !CalculateEvaporatorChkbox.IsChecked.Value)
+                return;
+
+            if (SetEvaporatorData() && guiChecks.TryGetValue(EvaporatorHumidity, out double humidity) &&
+                guiChecks.TryGetValue(HeightOverSea, out double height) &&
+                guiChecks.TryGetValue(EvaporatorV, out double volumeFlow))
+            {
+                // m3/h
+                if (EvapFlowUnitOptions.SelectedIndex == 0)
+                    volumeFlow /= 3600;
+
+                EvaporatorResultP.Text = _systemCalculation.CalculateEvaporator(humidity, height, volumeFlow).ToString();
+            }
+        }
+
+        private bool SetEvaporatorData()
+        {
+            if (!guiChecks.TryGetValue(EvaporatorTin, out double evaporatorTin) ||
+                !guiChecks.TryGetValue(EvaporatorTout, out double evaporatorTout)) return false;
+
+
+            _systemCalculation.EvaporatorData = new CoilData(null, evaporatorTin - evaporatorTout, evaporatorTin);
 
             return true;
         }
@@ -211,11 +246,25 @@ namespace MainGUI
 
             if (_calculationDone)
             {
-                _compareWindow = new CompareWindow(SystemCalculation.GetSysCOP, SystemCalculation.GetSysPhe, SystemCalculation.GetSysPe);
+                _compareWindow = new CompareWindow(SystemCalculation.GetSysCOP, SystemCalculation.GetSysPhe,
+                    SystemCalculation.GetSysPe);
                 _compareWindow.Show();
             }
             else
                 ErrorPrinting.PrintError("First Calculate system.");
+        }
+
+        private void CalculateEvaporatorChkbox_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (!CalculateEvaporatorChkbox.IsChecked.HasValue)
+                return;
+
+            if (CalculateEvaporatorChkbox.IsChecked.Value)
+                EvaporatorPCanvas.Visibility =
+                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Visible;
+            else
+                EvaporatorPCanvas.Visibility =
+                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Hidden;
         }
     }
 }

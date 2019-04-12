@@ -1,15 +1,21 @@
-﻿using System;
-using System.Windows.Navigation;
-
-namespace MainGUI
+﻿namespace MainGUI
 {
     public struct CoilData
     {
+        public enum InputOptionEnum
+        {
+            Capacity,
+            QmAndT,
+            HumidityAndT
+        }
+
         public double? Qm;
         public double? DeltaT;
         public double? T1;
         public double? T2;
         public double? P;
+
+        public InputOptionEnum InputOption;
 
         public CoilData(double p)
         {
@@ -18,6 +24,8 @@ namespace MainGUI
             T1 = null;
             T2 = null;
             P = p;
+
+            InputOption = InputOptionEnum.Capacity;
         }
 
         public CoilData(double qm, double? deltaT, double? t1, double? t2)
@@ -27,6 +35,19 @@ namespace MainGUI
             T1 = t1;
             T2 = t2;
             P = null;
+
+            InputOption = InputOptionEnum.QmAndT;
+        }
+
+        public CoilData(double? qm, double? deltaT, double t1)
+        {
+            Qm = qm;
+            DeltaT = deltaT;
+            T1 = t1;
+            T2 = null;
+            P = null;
+
+            InputOption = InputOptionEnum.HumidityAndT;
         }
     }
 
@@ -36,7 +57,9 @@ namespace MainGUI
 
         public double CalcCoil(CoilData coilData)
         {
-            var P = coilData.DeltaT != null ? CalcCoil((double)coilData.Qm, (double) coilData.DeltaT) : CalcCoil((double) coilData.Qm, (double) coilData.T1, (double) coilData.T2);
+            var P = coilData.DeltaT != null
+                ? CalcCoil((double) coilData.Qm, (double) coilData.DeltaT)
+                : CalcCoil((double) coilData.Qm, (double) coilData.T1, (double) coilData.T2);
 
             return P ?? 0;
         }
