@@ -1,10 +1,9 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Media3D;
-
+using System.Windows.Input;
+//TODO comment the whole code
 namespace MainGUI
 {
     /// <summary>
@@ -12,9 +11,9 @@ namespace MainGUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GUIChecks guiChecks = new GUIChecks();
         private SystemCalculation _systemCalculation = new SystemCalculation();
         private CompareWindow _compareWindow;
+        private BivalentSimulation _bivalentSimulationWindow;
 
         private readonly string[] _compressorOptions = {"Capacity", "U, I"};
         private readonly string[] _condenseDataOptions = {"Delta T", "Tin,W ; Tout,W", "P"};
@@ -74,13 +73,13 @@ namespace MainGUI
         {
             if (CompressorCapacityCanvas.Visibility == Visibility.Visible)
             {
-                if (!guiChecks.TryGetValue(CompressorCapacityTextBox, out double compressorP)) return false;
+                if (!GUIChecks.TryGetValue(CompressorCapacityTextBox, out double compressorP)) return false;
                 _systemCalculation.CompressorData = new ElectricalApplianceData(compressorP);
                 return true;
             }
 
-            if (!guiChecks.TryGetValue(CompressorUTextBox, out double compressorU) ||
-                !guiChecks.TryGetValue(CompressorITextBox, out double compressorI)) return false;
+            if (!GUIChecks.TryGetValue(CompressorUTextBox, out double compressorU) ||
+                !GUIChecks.TryGetValue(CompressorITextBox, out double compressorI)) return false;
             _systemCalculation.CompressorData = new ElectricalApplianceData(compressorU, compressorI);
             return true;
         }
@@ -94,12 +93,12 @@ namespace MainGUI
             // if user knows P of condenser
             if (CondenserPCanvas.Visibility == Visibility.Visible)
             {
-                if (!guiChecks.TryGetValue(CondenserP, out double condenserP)) return false;
+                if (!GUIChecks.TryGetValue(CondenserP, out double condenserP)) return false;
                 _systemCalculation.CondenserData = new CoilData(condenserP);
                 return true;
             }
 
-            if (!guiChecks.TryGetValue(CondenserV, out double condenserV))
+            if (!GUIChecks.TryGetValue(CondenserV, out double condenserV))
                 return false;
 
             // m3/h
@@ -109,12 +108,12 @@ namespace MainGUI
             switch (DeltaTCanvas.Visibility)
             {
                 case Visibility.Visible:
-                    if (!guiChecks.TryGetValue(CondenserDeltaT, out double condenserDeltaT)) return false;
+                    if (!GUIChecks.TryGetValue(CondenserDeltaT, out double condenserDeltaT)) return false;
                     _systemCalculation.CondenserData = new CoilData(condenserV, condenserDeltaT, null, null);
                     break;
                 case Visibility.Hidden:
-                    if (!guiChecks.TryGetValue(CondenserT1, out double condenserT1) ||
-                        !guiChecks.TryGetValue(CondenserT2, out double condenserT2)) return false;
+                    if (!GUIChecks.TryGetValue(CondenserT1, out double condenserT1) ||
+                        !GUIChecks.TryGetValue(CondenserT2, out double condenserT2)) return false;
                     _systemCalculation.CondenserData = new CoilData(condenserV, null, condenserT1, condenserT2);
                     break;
             }
@@ -127,9 +126,9 @@ namespace MainGUI
             if (!CalculateEvaporatorChkbox.IsChecked.HasValue || !CalculateEvaporatorChkbox.IsChecked.Value)
                 return;
 
-            if (SetEvaporatorData() && guiChecks.TryGetValue(EvaporatorHumidity, out double humidity) &&
-                guiChecks.TryGetValue(HeightOverSea, out double height) &&
-                guiChecks.TryGetValue(EvaporatorV, out double volumeFlow))
+            if (SetEvaporatorData() && GUIChecks.TryGetValue(EvaporatorHumidity, out double humidity) &&
+                GUIChecks.TryGetValue(HeightOverSea, out double height) &&
+                GUIChecks.TryGetValue(EvaporatorV, out double volumeFlow))
             {
                 // m3/h
                 if (EvapFlowUnitOptions.SelectedIndex == 0)
@@ -141,8 +140,8 @@ namespace MainGUI
 
         private bool SetEvaporatorData()
         {
-            if (!guiChecks.TryGetValue(EvaporatorTin, out double evaporatorTin) ||
-                !guiChecks.TryGetValue(EvaporatorTout, out double evaporatorTout)) return false;
+            if (!GUIChecks.TryGetValue(EvaporatorTin, out double evaporatorTin) ||
+                !GUIChecks.TryGetValue(EvaporatorTout, out double evaporatorTout)) return false;
 
 
             _systemCalculation.EvaporatorData = new CoilData(null, evaporatorTin - evaporatorTout, evaporatorTin);
@@ -193,45 +192,56 @@ namespace MainGUI
         }
 
         #region TextBoxTextChanged
-
+        //TODO move to only one method
         private void CondenserV_TextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CondenserDeltaT_TextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CompressorCapacityTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CompressorUTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CompressorITextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CondenserT1_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CondenserT2_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void CondenserP_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
+        }
+
+        private void TextBoxOnChange(object sender, TextChangedEventArgs e)
+        {
+            GUIChecks.ReplaceDot(sender, e);
+        }
+
+        //TODO to all the textboxes
+        private void TextBoxTextPreview(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !GUIChecks.IsTextAllowed(e.Text);
         }
 
         #endregion
@@ -252,6 +262,18 @@ namespace MainGUI
             }
             else
                 ErrorPrinting.PrintError("First Calculate system.");
+        }
+
+        private void ShowBivalentSimulationWindowButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_bivalentSimulationWindow != null && _bivalentSimulationWindow.IsVisible)
+            {
+                _bivalentSimulationWindow.Activate();
+                return;
+            }
+
+            _bivalentSimulationWindow = new BivalentSimulation();
+            _bivalentSimulationWindow.Show();
         }
 
         private void CalculateEvaporatorChkbox_Clicked(object sender, RoutedEventArgs e)

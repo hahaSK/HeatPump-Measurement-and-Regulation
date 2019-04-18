@@ -1,18 +1,22 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace MainGUI
 {
-    public class GUIChecks
+    public static class GUIChecks
     {
+        private static readonly Regex Regex = new Regex("[^0-9.,-]+"); //regex that matches disallowed text
+
         /// <summary>
         /// Tries to parse the text of text box to double.
         /// </summary>
         /// <param name="textBox">Text box to parse</param>
         /// <param name="result">Result of the parse</param>
         /// <returns><see cref="T:True" /> if the parse was successful</returns>
-        public bool TryGetValue(TextBox textBox, out double result)
+        public static bool TryGetValue(TextBox textBox, out double result)
         {
-            if (double.TryParse(textBox.Text, out double parseResult))
+            if (Double.TryParse(textBox.Text, out double parseResult))
             {
                 result = parseResult;
                 return true;
@@ -23,7 +27,12 @@ namespace MainGUI
             return false;
         }
 
-        public void ReplaceDot(object sender, TextChangedEventArgs e)
+        public static bool IsTextAllowed(string text)
+        {
+            return !Regex.IsMatch(text);
+        }
+
+        public static void ReplaceDot(object sender, TextChangedEventArgs e)
         {
             if (!(sender is TextBox tb))
             {
@@ -31,7 +40,6 @@ namespace MainGUI
                 return;
             }
 
-           
             using (tb.DeclareChangeBlock())
             {
                 foreach (var c in e.Changes)
@@ -42,6 +50,7 @@ namespace MainGUI
                     {
                         tb.SelectedText = tb.SelectedText.Replace('.', ',');
                     }
+
                     tb.Select(c.Offset + c.AddedLength, 0);
                 }
             }

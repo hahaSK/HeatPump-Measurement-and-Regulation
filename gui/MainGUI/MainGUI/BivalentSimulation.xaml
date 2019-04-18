@@ -1,0 +1,45 @@
+﻿<Window x:Class="MainGUI.BivalentSimulation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:MainGUI"
+        mc:Ignorable="d"
+        Title="BivalentSimulation" Height="500" Width="800">
+    <Grid>
+        <Canvas Margin="43.494,19.04,599.173,398">
+            <Label Content="Modes" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="53.172"/>
+            <ComboBox x:Name="ModeCombBox" SelectionChanged="ModeCombBox_SelectionChanged" SelectedIndex="0" Width="150" Height="22" MinWidth="100" MinHeight="22" Canvas.Top="27.96" />
+        </Canvas>
+        <Canvas x:Name="MonovalentSchemaCanvas" Margin="10,83.833,502,180.167">
+            <Image Source="Image1.png" Stretch="Fill" Width="280" Height="200"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Canvas.Left="13.999" Canvas.Top="89.999"><Run Text="Heat"/><LineBreak/><Run Text="Pump"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Canvas.Left="190.499" Canvas.Top="89.999"><Run Text="Heating"/><LineBreak/><Run Text="System"/></TextBlock>
+        </Canvas>
+        <Canvas x:Name="BivalentSchemaCanvas" Margin="10,83.833,502,121.167" d:IsHidden="True">
+            <Image Source="BivalentImage.png" Stretch="Fill" Width="280" Height="254"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Canvas.Left="10" Canvas.Top="130.099" FontSize="9"><Run Text="Additional "/><LineBreak/><Run Text="Heat source"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Canvas.Left="188.499" Canvas.Top="124.779"><Run Text="Heating"/><LineBreak/><Run Text="System"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Canvas.Left="92.083" Canvas.Top="130.099" FontSize="9"><Run Text="Heat"/><LineBreak/><Run Text="Pump"/></TextBlock>
+        </Canvas>
+        <Canvas x:Name="AmbientTempCanvas" Margin="374,45.04,288.853,282">
+            <Label Content="Ambient temperatures" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="min [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="30.96"/>
+            <Label Content="max [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="74.716" Canvas.Top="30.96"/>
+            <TextBox x:Name="AmbientMinTempTxtBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="-20" VerticalAlignment="Top" Width="35" Canvas.Left="9.513" Canvas.Top="61.92" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview"/>
+            <TextBox x:Name="AmbientMaxTEmpTxtBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="22" VerticalAlignment="Top" Width="35" Canvas.Left="84.513" Canvas.Top="61.92" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview"/>
+            <Label Content="Zero Load [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="88" Canvas.Left="21.332" ToolTip="External temperature when the heat loss of the object is 0."/>
+            <TextBox x:Name="ZeroLoadTempTxtBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="16" VerticalAlignment="Top" Width="35" Canvas.Left="44.18" Canvas.Top="118.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" ToolTip="External temperature when the heat loss of the object is 0."/>
+        </Canvas>
+        <Canvas x:Name="HeatLossCoefficientCanvas" Margin="540,50.04,158.78,339.04">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Object heat loss"/><LineBreak/><Run Text="coefficient [W/°C"/><Run Text="]"/></TextBlock>
+            <TextBox x:Name="ObjectHeatLossCoeffTxtBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="520" VerticalAlignment="Top" Width="50" Canvas.Left="23" Canvas.Top="56.92" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview"/>
+        </Canvas>
+        <Canvas x:Name="BivalentTempCanvas" Margin="667,50.04,36.923,339.04">
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Bivalent"/><LineBreak/><Run Text="temperature [°C]"/></TextBlock>
+            <TextBox x:Name="BivalentTempTxtBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="35" Canvas.Left="22.513" Canvas.Top="56.92" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview"/>
+        </Canvas>
+        <lvc:CartesianChart x:Name="BivalentPointChart" HorizontalAlignment="Left" Height="267" Margin="387,192,0,0" VerticalAlignment="Top" Width="395" Series="{Binding SeriesCollection}"/>
+    </Grid>
+</Window>

@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Navigation;
 
 namespace MainGUI
 {
@@ -11,9 +10,7 @@ namespace MainGUI
     /// </summary>
     public partial class CompareWindow : Window
     {
-        private readonly GUIChecks _guiChecks = new GUIChecks();
-
-        private readonly string[] _otherSystemInputOptions = {"COP", "Phe and Pe"};
+       private readonly string[] _otherSystemInputOptions = {"COP", "Phe and Pe"};
 
         public CompareWindow(double COP, double Phe, double Pe)
         {
@@ -61,12 +58,12 @@ namespace MainGUI
             switch (OtherSystemInputOptions.SelectedIndex)
             {
                 case 0:
-                    if (!_guiChecks.TryGetValue(OtherSystemCOPTextbox, out double otherSysCOP)) return false;
+                    if (!GUIChecks.TryGetValue(OtherSystemCOPTextbox, out double otherSysCOP)) return false;
                     CompareCOP(otherSysCOP);
                     break;
                 case 1:
-                    if (!_guiChecks.TryGetValue(OtherSystemPeTextbox, out double otherSysPe) ||
-                        !_guiChecks.TryGetValue(OtherSystemPheTextbox, out double otherSysPhe)) return false;
+                    if (!GUIChecks.TryGetValue(OtherSystemPeTextbox, out double otherSysPe) ||
+                        !GUIChecks.TryGetValue(OtherSystemPheTextbox, out double otherSysPhe)) return false;
                     CompareCapacities(otherSysPhe, otherSysPe);
                     break;
             }
@@ -179,17 +176,17 @@ namespace MainGUI
 
         private void OtherSystemCOPTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void OtherSystemPeTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         private void OtherSystemPheTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _guiChecks.ReplaceDot(sender, e);
+            GUIChecks.ReplaceDot(sender, e);
         }
 
         #endregion
