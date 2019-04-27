@@ -52,6 +52,9 @@
   <PropertyGroup>
     <StartupObject>MainGUI.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>heatpumpicon_5Xg_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
@@ -171,6 +174,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="BivalentSimul\BivalentImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon_FcA_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="heatpumpicon_5Xg_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
