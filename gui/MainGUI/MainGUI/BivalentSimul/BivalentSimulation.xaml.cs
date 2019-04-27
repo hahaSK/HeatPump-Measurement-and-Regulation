@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -43,13 +42,27 @@ namespace MainGUI
             SetModeSchema();
 
             BivalentPointChart.LegendLocation = LegendLocation.Left;
-
             // always will be 0
-            Axis myYAxis = new Axis {MinValue = 0};
+            Axis myYAxis = new Axis
+            {
+                MinValue = 0,
+                Title = "Heat Loss [W]",
+                Foreground = Brushes.Black,
+                Separator = new LiveCharts.Wpf.Separator
+                    {Stroke = Brushes.Gray, StrokeDashArray = new DoubleCollection {4, 2}}
+            };
             BivalentPointChart.AxisY.Clear();
             BivalentPointChart.AxisY.Add(myYAxis);
             // default x axis
-            Axis myXAxis = new Axis {MinValue = -20, MaxValue = 22};
+            Axis myXAxis = new Axis
+            {
+                MinValue = -20,
+                MaxValue = 22,
+                Title = "Temperature [°C]",
+                Foreground = Brushes.Black,
+                Separator = new LiveCharts.Wpf.Separator
+                    {Step = 2, Stroke = Brushes.Gray, StrokeDashArray = new DoubleCollection {4, 2}}
+            };
             BivalentPointChart.AxisX.Clear();
             BivalentPointChart.AxisX.Add(myXAxis);
 

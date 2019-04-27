@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows;
+using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
@@ -38,7 +40,7 @@ namespace MainGUI
         private readonly ColumnSeries _bivalentPointColumnSeries = new ColumnSeries
         {
             Title = "Bivalent point",
-            StrokeThickness = 0.8,
+            StrokeThickness = 1,
             Fill = Brushes.Green,
             MaxColumnWidth = 3.5,
             Stroke = Brushes.Green,
@@ -48,10 +50,10 @@ namespace MainGUI
         private readonly ColumnSeries _additionalHeatSourceOnlyPoint = new ColumnSeries
         {
             Title = "Additional heat source only",
-            StrokeThickness = 0.8,
-            Fill = Brushes.DarkKhaki,
+            StrokeThickness = 1,
+            Fill = Brushes.DarkOrange,
             MaxColumnWidth = 3.5,
-            Stroke = Brushes.DarkKhaki,
+            Stroke = Brushes.DarkOrange,
             PointGeometry = DefaultGeometries.Cross
         };
 
@@ -122,7 +124,7 @@ namespace MainGUI
             double yValue = HeatLossCoefficient * (ZeroLoadTemp - currentAmbientTemp);
             if (yValue < 0)
                 yValue = 0;
-
+            
             _currentHeatLoss.Title = "Current heat loss";
             _currentHeatLoss.Values = new ChartValues<ObservablePoint>
             {
@@ -137,6 +139,8 @@ namespace MainGUI
             else
                 graph.Series.Add(_currentHeatLoss);
 
+            // draw the current heat loss point on-top of everything
+            System.Windows.Controls.Panel.SetZIndex(_currentHeatLoss, 10);
             heatLossChanged?.Invoke(yValue);
         }
     }
