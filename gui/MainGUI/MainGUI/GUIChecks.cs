@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MainGUI
 {
@@ -54,6 +55,11 @@ namespace MainGUI
                     tb.Select(c.Offset + c.AddedLength, 0);
                 }
             }
+        }
+
+        public static bool IsSpaceAllowed(KeyEventArgs key)
+        {
+            return key.Key != Key.Space;
         }
     }
 }

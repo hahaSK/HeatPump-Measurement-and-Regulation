@@ -6,7 +6,7 @@ namespace MainGUI
     {
         public static void PrintError(string message)
         {
-            MessageBox.Show(message, "Error", MessageBoxButton.OK);
+            MessageBox.Show(message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
     }

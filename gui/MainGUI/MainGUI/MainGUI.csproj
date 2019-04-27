@@ -81,17 +81,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BivalentGraph.cs" />
-    <Compile Include="BivalentSimulation.xaml.cs">
+    <Compile Include="BivalentSimul\BivalentGraph.cs" />
+    <Compile Include="BivalentSimul\BivalentSimulation.xaml.cs">
       <DependentUpon>BivalentSimulation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BivalentSimul\BivalentUtilization.cs" />
     <Compile Include="CompareWindow.xaml.cs">
       <DependentUpon>CompareWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="ElectricalAppliance.cs" />
+    <Compile Include="EnterKeyTraversal.cs" />
+    <Compile Include="Extensions\PopUpExtensions.cs" />
     <Compile Include="SystemCalculation.cs" />
-    <Page Include="BivalentSimulation.xaml">
+    <Page Include="BivalentSimul\BivalentSimulation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -164,10 +167,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image1.png" />
+    <Resource Include="BivalentSimul\Image1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="BivalentImage.png" />
+    <Resource Include="BivalentSimul\BivalentImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
