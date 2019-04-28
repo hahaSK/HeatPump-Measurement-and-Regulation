@@ -274,7 +274,7 @@ namespace MainGUI
 
             // if the capacity of heat pump is not enough
             HeatPumpUtilizationTextBox.ToolTip = "Actual utilization is " + utilization.Item1;
-            if (utilization.Item1 > 100 && _mode != Mode.Monovalent)
+            if (utilization.Item1 > 100 && _mode != Mode.AlternativeBivalent)
             {
                 HeatPumpUtilizationTextBox.Background = Brushes.Red;
                 HeatPumpUtilizationTextBox.Text = "100";
