@@ -4,21 +4,26 @@ namespace MainGUI
 {
     public class BivalentUtilization
     {
+        public bool HeatPumpOff { get; private set; }
         public double CurrentHeatLoss, HeatPumpMaxCapacity, AdditionalSourceMaxCapacity, CapacityAtBivalentPoint, AdditionalHeatSourceOnlyCapacity;
 
         public Tuple<double, double> Calculate(BivalentSimulation.Mode simulationMode)
         {
             double additionalSource = 0;
             double heatPumpUtilization = (CurrentHeatLoss / HeatPumpMaxCapacity) * 100;
+            HeatPumpOff = false;
             switch (simulationMode)
             {
-                case BivalentSimulation.Mode.AlternativeBivalent when heatPumpUtilization > 100:
+                // calculate additional source only when we cross bivalent point
+                case BivalentSimulation.Mode.AlternativeBivalent when CurrentHeatLoss > CapacityAtBivalentPoint:
                     additionalSource = (CurrentHeatLoss / AdditionalSourceMaxCapacity) * 100;
+                    HeatPumpOff = true;
                     break;
                 case BivalentSimulation.Mode.AlternativeBivalent:
                     additionalSource = 0;
                     break;
-                case BivalentSimulation.Mode.ParallelBivalent:
+                // in parallel bivalent mode add additional source only when we cross bivalent point
+                case BivalentSimulation.Mode.ParallelBivalent when CurrentHeatLoss > CapacityAtBivalentPoint:
                     additionalSource = ((CurrentHeatLoss - HeatPumpMaxCapacity) / AdditionalSourceMaxCapacity) * 100;
                     if (additionalSource < 0)
                         additionalSource = 0;
@@ -37,7 +42,7 @@ namespace MainGUI
                     {
                         additionalSource = (CurrentHeatLoss / AdditionalSourceMaxCapacity) * 100;
                         // signalizing that the heat pump is OFF
-                        heatPumpUtilization = -1;
+                        HeatPumpOff = true;
                     }
                     else
                         additionalSource = 0;

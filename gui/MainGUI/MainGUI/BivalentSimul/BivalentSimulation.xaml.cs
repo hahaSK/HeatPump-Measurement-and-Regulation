@@ -163,12 +163,15 @@ namespace MainGUI
 
         private void TextBoxLostFocus(object sender, RoutedEventArgs e)
         {
-            if (sender is TextBox textBox && textBox.Text == String.Empty)
+            TextBox textBox = sender as TextBox;
+            if (textBox != null && textBox.Text == String.Empty)
                 textBox.Text = "0";
 
             //TODO check textboxes if they are empty
             RedrawGraph();
             SetSliderMaximum();
+            if (_mode == Mode.Monovalent && textBox != null && textBox.Name == AmbientMinTempTxtBox.Name)
+                ShowSuggestedHeatPumpCapacity();
         }
 
         private void TextBoxPopUpSuggestion(object sender, RoutedEventArgs e)
@@ -258,7 +261,7 @@ namespace MainGUI
                 !GUIChecks.TryGetValue(AdditionalHeatSourceMaxCapacityTextBox,
                     out _bivalentUtilization.AdditionalSourceMaxCapacity)) return;
 
-            if (_mode == Mode.ParallelBivalent || _mode == Mode.PartiallyBivalent)
+            if (_mode != Mode.Monovalent)
             {
                 _bivalentUtilization.CapacityAtBivalentPoint = _bivalentGraph.CapacityAtBivalentPoint;
                 _bivalentUtilization.AdditionalHeatSourceOnlyCapacity = _bivalentGraph.AdditionalHeatSourceOnlyCapacity;
@@ -274,15 +277,12 @@ namespace MainGUI
 
             // if the capacity of heat pump is not enough
             HeatPumpUtilizationTextBox.ToolTip = "Actual utilization is " + utilization.Item1;
-            if (utilization.Item1 > 100 && _mode != Mode.AlternativeBivalent)
+            if (utilization.Item1 > 100 && !_bivalentUtilization.HeatPumpOff)
             {
                 HeatPumpUtilizationTextBox.Background = Brushes.Red;
                 HeatPumpUtilizationTextBox.Text = "100";
             }
-            // in this mode the heat pump is turned off
-            // -1 in partially bivalent mode signalizing that the heat pump is OFF
-            else if ((utilization.Item1 > 100 && _mode == Mode.AlternativeBivalent) ||
-                     (utilization.Item1 < 0 && _mode == Mode.PartiallyBivalent))
+            else if (_bivalentUtilization.HeatPumpOff)
             {
                 HeatPumpUtilizationTextBox.Background = Brushes.Gray;
                 HeatPumpUtilizationTextBox.ToolTip += "\n OFF";

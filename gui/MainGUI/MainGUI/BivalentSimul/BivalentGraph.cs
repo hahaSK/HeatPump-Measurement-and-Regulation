@@ -110,8 +110,11 @@ namespace MainGUI
                 else // if the mode is not partially bivalent delete the line
                     _heatLossCollection.Remove(_additionalHeatSourceOnlyPoint);
             }
-            else // if the mode is not partially bivalent delete the line
+            else // if the mode is monovalent
+            {
                 _heatLossCollection.Remove(_additionalHeatSourceOnlyPoint);
+                _heatLossCollection.Remove(_bivalentPointColumnSeries);
+            }
 
             graph.Series = _heatLossCollection;
         }
