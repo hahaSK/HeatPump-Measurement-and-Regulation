@@ -5,7 +5,12 @@ namespace MainGUI
     public class BivalentUtilization
     {
         public bool HeatPumpOff { get; private set; }
-        public double CurrentHeatLoss, HeatPumpMaxCapacity, AdditionalSourceMaxCapacity, CapacityAtBivalentPoint, AdditionalHeatSourceOnlyCapacity;
+
+        public double CurrentHeatLoss,
+            HeatPumpMaxCapacity,
+            AdditionalSourceMaxCapacity,
+            CapacityAtBivalentPoint,
+            AdditionalHeatSourceOnlyCapacity;
 
         public Tuple<double, double> Calculate(BivalentSimulation.Mode simulationMode)
         {
@@ -29,12 +34,24 @@ namespace MainGUI
                         additionalSource = 0;
                     break;
                 case BivalentSimulation.Mode.PartiallyBivalent:
+                    
                     if (CurrentHeatLoss >= CapacityAtBivalentPoint && CurrentHeatLoss <= AdditionalHeatSourceOnlyCapacity)
                     {
                         double capacityDifference = CurrentHeatLoss - CapacityAtBivalentPoint;
                         // not % cause we use it in calculation below
                         heatPumpUtilization = (CurrentHeatLoss - capacityDifference / 2) / HeatPumpMaxCapacity;
-                        additionalSource = (((CurrentHeatLoss - heatPumpUtilization * HeatPumpMaxCapacity)) / AdditionalSourceMaxCapacity) * 100;
+
+                        // heat pump doesn't have spare capacity
+                        // so the additional heat source is covering the whole heat loss BUT heat pump is still ON
+                        if (heatPumpUtilization > 1)
+                            additionalSource = ((CurrentHeatLoss - HeatPumpMaxCapacity) / AdditionalSourceMaxCapacity) * 100;
+                        else
+                        {
+                            // heat pump has some spare capacity
+                            additionalSource = (((CurrentHeatLoss - heatPumpUtilization * HeatPumpMaxCapacity)) /
+                                                AdditionalSourceMaxCapacity) * 100;
+                        }
+                        
                         // to %
                         heatPumpUtilization *= 100;
                     }
@@ -46,8 +63,8 @@ namespace MainGUI
                     }
                     else
                         additionalSource = 0;
+
                     break;
-                 
             }
 
             heatPumpUtilization = Math.Round(heatPumpUtilization, 3);
