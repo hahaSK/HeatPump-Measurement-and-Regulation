@@ -8,14 +8,15 @@ namespace MainGUI
     public static class GUIChecks
     {
         private static readonly Regex Regex = new Regex("[^0-9.,-]+"); //regex that matches disallowed text
-
+        
         /// <summary>
         /// Tries to parse the text of text box to double.
         /// </summary>
         /// <param name="textBox">Text box to parse</param>
         /// <param name="result">Result of the parse</param>
+        /// <param name="showWindow">Show error window?</param>
         /// <returns><see cref="T:True" /> if the parse was successful</returns>
-        public static bool TryGetValue(TextBox textBox, out double result)
+        public static bool TryGetValue(TextBox textBox, out double result, bool showWindow = true)
         {
             if (Double.TryParse(textBox.Text, out double parseResult))
             {
@@ -23,7 +24,9 @@ namespace MainGUI
                 return true;
             }
 
-            ErrorPrinting.PrintError("Couldn't parse " + textBox.Text + " of " + textBox.Name + "!");
+            if (showWindow)
+                ErrorPrinting.PrintError("Couldn't parse " + textBox.Text + " of " + textBox.Name + "!");
+
             result = 0;
             return false;
         }
