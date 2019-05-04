@@ -296,11 +296,11 @@ namespace MainGUI
 
         private void RealTimeModeMeasurementBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_realTimeMeasurementWindow != null && _realTimeMeasurementWindow.IsVisible)
+            /*if (_realTimeMeasurementWindow != null && _realTimeMeasurementWindow.IsVisible)
             {
                 _realTimeMeasurementWindow.Activate();
                 return;
-            }
+            }*/
 
             _realTimeMeasurementWindow = new RealTimeMeasurementWindow();
             _realTimeMeasurementWindow.Show();

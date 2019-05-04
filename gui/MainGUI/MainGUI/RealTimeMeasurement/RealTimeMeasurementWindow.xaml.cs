@@ -13,12 +13,12 @@ namespace MainGUI.RealTimeMeasurement
     /// </summary>
     public partial class RealTimeMeasurementWindow : Window
     {
-        public static ConsoleManager ConsoleManager => _consoleManager;
+        public ConsoleManager ConsoleManager => _consoleManager;
 
         private readonly OpenFileDialog _openFileDialog = new OpenFileDialog();
-        private readonly RealTimeMeasurementData _realTimeMeasurementData = new RealTimeMeasurementData();
-        private static ConsoleManager _consoleManager;
-        private static SystemCalculation _systemCalculation = new SystemCalculation();
+        private readonly RealTimeMeasurementData _realTimeMeasurementData;
+        private readonly ConsoleManager _consoleManager;
+        private readonly SystemCalculation _systemCalculation = new SystemCalculation();
 
         private readonly Timer _loadFileTimer = new Timer();
 
@@ -29,7 +29,10 @@ namespace MainGUI.RealTimeMeasurement
         public RealTimeMeasurementWindow()
         {
             InitializeComponent();
-            InitConsoleManager(ConsoleTextBox);
+            _consoleManager = new ConsoleManager(ConsoleTextBox);
+            //InitConsoleManager(ConsoleTextBox);
+
+            _realTimeMeasurementData = new RealTimeMeasurementData(this);
 
             CalculateEvaporatorChkbox_Clicked(this, new RoutedEventArgs());
         }
@@ -40,10 +43,10 @@ namespace MainGUI.RealTimeMeasurement
             _loadFileTimer.Close();
         }
 
-        private static void InitConsoleManager(TextBox console)
+        /*private static void InitConsoleManager(TextBox console)
         {
-            _consoleManager = new ConsoleManager(console);
-        }
+            
+        }*/
 
         private void ChooseFileBtn_Click(object sender, RoutedEventArgs e)
         {

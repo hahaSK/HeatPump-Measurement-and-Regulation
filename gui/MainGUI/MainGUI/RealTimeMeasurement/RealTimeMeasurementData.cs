@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace MainGUI.RealTimeMeasurement
 {
@@ -37,6 +36,12 @@ namespace MainGUI.RealTimeMeasurement
     public class RealTimeMeasurementData
     {
         private MeasurementData _measurementData = new MeasurementData();
+        private RealTimeMeasurementWindow realTimeMeasurementWindow;
+
+        public RealTimeMeasurementData(RealTimeMeasurementWindow realTimeMeasurementWindow)
+        {
+            this.realTimeMeasurementWindow = realTimeMeasurementWindow;
+        }
 
         /// <summary>
         /// Read data from file.
@@ -144,10 +149,10 @@ namespace MainGUI.RealTimeMeasurement
             #endregion
 
             if (readSuccessful)
-                RealTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage(
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage(
                     "Reading data from: " + fileName + " successful!");
             else
-                RealTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage(
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage(
                     "Reading data from: " + fileName + " unsuccessful!");
 
             #region Message of loaded data
@@ -173,7 +178,7 @@ namespace MainGUI.RealTimeMeasurement
             message += nameof(_measurementData.COP) + "=" + _measurementData.COP + ";";
             #endregion
 
-            RealTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("Data: " + message);
+            realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("Data: " + message);
 
             return new Tuple<bool, MeasurementData>(readSuccessful, _measurementData);
         }
