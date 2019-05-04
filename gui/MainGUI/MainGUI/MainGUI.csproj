@@ -96,6 +96,11 @@
     <Compile Include="ElectricalAppliance.cs" />
     <Compile Include="EnterKeyTraversal.cs" />
     <Compile Include="Extensions\PopUpExtensions.cs" />
+    <Compile Include="RealTimeMeasurement\ConsoleManager.cs" />
+    <Compile Include="RealTimeMeasurement\RealTimeMeasurementData.cs" />
+    <Compile Include="RealTimeMeasurement\RealTimeMeasurementWindow.xaml.cs">
+      <DependentUpon>RealTimeMeasurementWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SystemCalculation.cs" />
     <Page Include="BivalentSimul\BivalentSimulation.xaml">
       <SubType>Designer</SubType>
@@ -122,6 +127,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RealTimeMeasurement\RealTimeMeasurementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Simple Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

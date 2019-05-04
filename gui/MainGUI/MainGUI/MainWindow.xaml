@@ -62,7 +62,7 @@
                 <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
         </Canvas>
-        <Canvas x:Name="SystemCanvas" Margin="218.204,132,199.146,542.167">
+        <Canvas x:Name="SystemCanvas" Margin="218.204,132,247.146,347.167">
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="143.5" Stroke="Black"
                        VerticalAlignment="Top" Width="80" Canvas.Left="58.9" Canvas.Top="87" />
             <Path Data="M145.83333,521.5 L130,500.5 188.5,477.5 123.5,456.5 183,436 126,415.5 173.5,390.5 154,379"
@@ -217,5 +217,6 @@
             <Label Content="Height over sea [m]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-32" />
         </Canvas>
         <Button x:Name="ShowBivalentSimulationWindowBtn" Content="Bivalent simulation" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" Margin="685.75,558.87,0,0" Click="ShowBivalentSimulationWindowButton_Click"/>
+        <Button x:Name="RealTimeModeMeasurementBtn" Content="Real Time Model Measurement" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" Margin="685.75,583.83,0,0" Click="RealTimeModeMeasurementBtn_Click"/>
     </Grid>
 </Window>

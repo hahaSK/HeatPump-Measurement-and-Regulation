@@ -3,6 +3,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MainGUI.RealTimeMeasurement;
+
 //TODO comment the whole code
 namespace MainGUI
 {
@@ -14,6 +16,7 @@ namespace MainGUI
         private SystemCalculation _systemCalculation = new SystemCalculation();
         private CompareWindow _compareWindow;
         private BivalentSimulation _bivalentSimulationWindow;
+        private RealTimeMeasurementWindow _realTimeMeasurementWindow;
 
         private readonly string[] _compressorOptions = {"Capacity", "U, I"};
         private readonly string[] _condenseDataOptions = {"Delta T", "Tin,W ; Tout,W", "P"};
@@ -134,7 +137,8 @@ namespace MainGUI
                 if (EvapFlowUnitOptions.SelectedIndex == 0)
                     volumeFlow /= 3600;
 
-                EvaporatorResultP.Text = _systemCalculation.CalculateEvaporator(humidity, height, volumeFlow).ToString();
+                EvaporatorResultP.Text =
+                    _systemCalculation.CalculateEvaporator(humidity, height, volumeFlow).ToString();
             }
         }
 
@@ -192,6 +196,7 @@ namespace MainGUI
         }
 
         #region TextBoxTextChanged
+
         //TODO move to only one method
         private void CondenserV_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -241,10 +246,23 @@ namespace MainGUI
         //TODO to all the textboxes
         private void TextBoxTextPreview(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !GUIChecks.IsTextAllowed(e.Text);
+            e.Handled = !GUIChecks.IsTextAllowedForDouble(e.Text);
         }
 
         #endregion
+
+        private void CalculateEvaporatorChkbox_Clicked(object sender, RoutedEventArgs e)
+        {
+            if (!CalculateEvaporatorChkbox.IsChecked.HasValue)
+                return;
+
+            if (CalculateEvaporatorChkbox.IsChecked.Value)
+                EvaporatorPCanvas.Visibility =
+                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Visible;
+            else
+                EvaporatorPCanvas.Visibility =
+                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Hidden;
+        }
 
         private void ShowCompareWindowButton_Click(object sender, RoutedEventArgs e)
         {
@@ -276,17 +294,16 @@ namespace MainGUI
             _bivalentSimulationWindow.Show();
         }
 
-        private void CalculateEvaporatorChkbox_Clicked(object sender, RoutedEventArgs e)
+        private void RealTimeModeMeasurementBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!CalculateEvaporatorChkbox.IsChecked.HasValue)
+            if (_realTimeMeasurementWindow != null && _realTimeMeasurementWindow.IsVisible)
+            {
+                _realTimeMeasurementWindow.Activate();
                 return;
+            }
 
-            if (CalculateEvaporatorChkbox.IsChecked.Value)
-                EvaporatorPCanvas.Visibility =
-                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Visible;
-            else
-                EvaporatorPCanvas.Visibility =
-                    EvaporatorTCanvas.Visibility = EvaporatorVCanvas.Visibility = Visibility.Hidden;
+            _realTimeMeasurementWindow = new RealTimeMeasurementWindow();
+            _realTimeMeasurementWindow.Show();
         }
     }
 }

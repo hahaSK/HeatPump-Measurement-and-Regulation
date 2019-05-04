@@ -153,7 +153,7 @@ namespace MainGUI
 
         private void TextBoxTextPreview(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !GUIChecks.IsTextAllowed(e.Text);
+            e.Handled = !GUIChecks.IsTextAllowedForDouble(e.Text);
         }
 
         private void TextBoxKeyDownPreview(object sender, KeyEventArgs e)
@@ -239,8 +239,8 @@ namespace MainGUI
                 return;
             _isChanging = true;
             GUIChecks.ReplaceDot(sender, e);
-            //TODO if parsing on textchange error log is raised when there is nothing in the textbox
-            if (!GUIChecks.TryGetValue(CurrentTempTextBox, out double txtBoxValue))
+            
+            if (!GUIChecks.TryGetValue(CurrentTempTextBox, out double txtBoxValue, false))
             {
                 _isChanging = false;
                 return;
