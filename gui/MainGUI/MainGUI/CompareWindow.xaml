@@ -6,66 +6,62 @@
         xmlns:local="clr-namespace:MainGUI"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="Compare" Height="470" Width="300">
+        Title="Compare" Height="640" Width="300">
     <Grid>
 
-        <Label Content="Other System" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top"/>
-        <Canvas x:Name="ThisSystemCanvas" Margin="10,10,210.033,142.333">
+        <Label Content="Other System" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Canvas x:Name="ThisSystemCanvas" Margin="10,10,210.033,444.333">
             <TextBox x:Name="ThisSystemCOPTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="60.667"/>
             <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="29.706"/>
             <TextBox x:Name="ThisSystemPeTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="125.334"/>
             <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="94.372"/>
             <TextBox x:Name="ThisSystemPheTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="190.667"/>
             <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="159.705"/>
-            <Label Content="This System" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label Content="This System" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
         </Canvas>
         <Path Data="M110,1 L110.42987,237.21212 110.66667,367.333 110.99951,585.35094" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="237" Margin="108,-1,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="5"/>
-        <Canvas x:Name="OtherSystemCanvas" Margin="152,39.706,69.5,244.333">
-            <Canvas x:Name="OtherSysCOPCanvas" Height="53.961" Width="70.5" Canvas.Top="70.716">
-                <TextBox x:Name="OtherSystemCOPTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="30.961" TextChanged="OtherSystemCOPTextbox_TextChanged"/>
-                <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-            </Canvas>
-            <Canvas x:Name="OtherSysPePheCanvas" Height="119.295" Canvas.Top="44.266" Width="70.5" d:IsHidden="True">
-                <TextBox x:Name="OtherSystemPeTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="30.962" TextChanged="OtherSystemPeTextbox_TextChanged"/>
+        <Canvas x:Name="OtherSystemCanvas" Margin="152,39.706,69.5,444.333">
+            <Canvas x:Name="OtherSysPePheCanvas" Height="119.295" Canvas.Top="63.266" Width="70.5" Canvas.Left="2">
+                <TextBox x:Name="OtherSystemPeTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="30.962" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative"/>
                 <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-                <TextBox x:Name="OtherSystemPheTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="96.295" TextChanged="OtherSystemPheTextbox_TextChanged"/>
+                <TextBox x:Name="OtherSystemPheTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="96.295" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative"/>
                 <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="65.333"/>
 
             </Canvas>
-            <ComboBox x:Name="OtherSystemInputOptions" Width="86" Height="20" Canvas.Top="10" SelectedIndex="0" SelectionChanged="OtherSystemInputOptions_SelectionChanged"/>
 
         </Canvas>
         <Path Data="M1,234 L292,233.66667" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="4.333" Margin="-1,231.667,-2,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="295"/>
-        <Button Content="Compare" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="200,401.167,0,0" Click="Button_Click"/>
-        <Canvas x:Name="ThisSystemResultCanvas" Margin="10,273.705,213.5,69.833">
-            <Canvas x:Name="ThisSystemCOPResultCanvas" Height="53.962" Width="70.5">
-                <TextBox x:Name="ThisSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
-                <Label Content="COP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-            </Canvas>
-            <Canvas x:Name="ThisSystemPePheResultCanvas" Height="112.924" Width="70.5">
-                <TextBox x:Name="ThisSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
-                <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-                <TextBox x:Name="ThisSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
-                <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
-            </Canvas>
+        <Button Content="Compare" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="209,572.962,0,0" Click="Button_Click"/>
+        <Canvas x:Name="ThisSystemResultCanvas" Margin="10,273.705,213.5,221">
+            <TextBox x:Name="ThisSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
+            <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
+            <TextBox x:Name="ThisSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
+            <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
+            <TextBox x:Name="ThisSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="153.553"/>
+            <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="122.59"/>
         </Canvas>
         <Label Content="Results" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90.499,241,0,0" FontWeight="Bold"/>
         <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="37.04" Margin="110.333,265,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4"/>
-        <Canvas x:Name="OtherSystemResultCanvas" Margin="175.333,271.038,46.167,57.167">
-            <Canvas x:Name="OtherSystemCOPResultCanvas" Height="53.962" Width="70.5">
-                <TextBox x:Name="OtherSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
-                <Label Content="COP" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-            </Canvas>
-            <Canvas x:Name="OtherSystemPePheResultCanvas" Height="112.924" Width="70.5">
-                <TextBox x:Name="OtherSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
-                <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
-                <TextBox x:Name="OtherSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
-                <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
-            </Canvas>
+        <Canvas x:Name="OtherSystemResultCanvas" Margin="175.333,271.038,46.167,221">
+            <TextBox x:Name="OtherSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
+            <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
+            <TextBox x:Name="OtherSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
+            <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
+            <TextBox x:Name="OtherSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="155.962"/>
+            <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="125"/>
         </Canvas>
-        <Label x:Name="COPPePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="85.5,302.04,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="85.5,302.04,0,0" VerticalAlignment="Top"/>
         <Label x:Name="PhePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="85.5,360.54,0,0" VerticalAlignment="Top"/>
         <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="32.54" Margin="110.333,328,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4"/>
+        <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="32.54" Margin="110.333,391.5,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4"/>
+        <Label x:Name="COPPercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="85.5,424.04,0,0" VerticalAlignment="Top"/>
+        <Path Data="M1,234 L292,233.66667" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="4.333" Margin="0,455,-1,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="295"/>
+        <Label Content="Economic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90.499,464.333,0,0" FontWeight="Bold"/>
+        <Label Content="Price for kWh" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="84.242,490.293,0,0"/>
+        <TextBox x:Name="PriceForkWhTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="4,5" VerticalAlignment="Top" Width="70.5" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Margin="90.499,516.253,0,0"/>
+        <TextBox x:Name="ThisSystemElectricCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Margin="13.467,544.962,0,0"/>
+        <Label x:Name="PricePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="90.499,544.962,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="OtherSystemElectricCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Margin="175.333,544.962,0,0"/>
 
     </Grid>
 </Window>

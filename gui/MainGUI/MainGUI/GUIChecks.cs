@@ -9,6 +9,7 @@ namespace MainGUI
     {
         private static readonly Regex RegexForDouble = new Regex("[^0-9.,-]+"); //regex that matches disallowed text
         private static readonly Regex RegexForUint = new Regex("[^0-9]+"); //regex that matches disallowed text
+        private static readonly Regex RegexForDoubleNonNegative = new Regex("[^0-9.,]+");
 
         /// <summary>
         /// Tries to parse the text of text box to double.
@@ -57,6 +58,11 @@ namespace MainGUI
         public static bool IsTextAllowedForDouble(string text)
         {
             return !RegexForDouble.IsMatch(text);
+        }
+
+        public static bool IsTextAllowedForDoubleNonNegative(string text)
+        {
+            return !RegexForDoubleNonNegative.IsMatch(text);
         }
 
         public static bool IsTextAllowedForUint(string text)

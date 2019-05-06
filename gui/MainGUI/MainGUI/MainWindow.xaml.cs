@@ -58,10 +58,12 @@ namespace MainGUI
                 return;
             }
 
-            if (!_systemCalculation.CalculateSystem().HasValue)
+            var systemResult = _systemCalculation.CalculateSystem();
+            if (!systemResult.HasValue)
                 return;
 
             SystemCOPResultTextBox.Text = SystemCalculation.GetSysCOP.ToString("F1");
+            CondenserPResultTextBox.Text = systemResult.Value.Phe.ToString("F1"); 
 
             SetEvaporator();
 
@@ -153,8 +155,7 @@ namespace MainGUI
             return true;
         }
 
-        private void CompressorInputOptions_SelectionChanged(object sender,
-            System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CompressorInputOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (CompressorInputOptions.SelectedIndex)
             {
@@ -169,84 +170,57 @@ namespace MainGUI
             }
         }
 
-        private void CondDataOptions_SelectionChanged(object sender,
-            System.Windows.Controls.SelectionChangedEventArgs e)
+        private void CondDataOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (CondDataOptions.SelectedIndex)
             {
+                // delta T
                 case 0:
                     CondenserVCanvas.Visibility = Visibility.Visible;
                     DeltaTCanvas.Visibility = Visibility.Visible;
                     T1T2Canvas.Visibility = Visibility.Hidden;
                     CondenserPCanvas.Visibility = Visibility.Hidden;
+                    CondenserCalculatedPCanvas.Visibility = Visibility.Visible;
                     break;
+                // T1 and T2
                 case 1:
                     CondenserVCanvas.Visibility = Visibility.Visible;
                     DeltaTCanvas.Visibility = Visibility.Hidden;
                     T1T2Canvas.Visibility = Visibility.Visible;
                     CondenserPCanvas.Visibility = Visibility.Hidden;
+                    CondenserCalculatedPCanvas.Visibility = Visibility.Visible;
                     break;
+                // P
                 case 2:
                     CondenserVCanvas.Visibility = Visibility.Hidden;
                     DeltaTCanvas.Visibility = Visibility.Hidden;
                     T1T2Canvas.Visibility = Visibility.Hidden;
                     CondenserPCanvas.Visibility = Visibility.Visible;
+                    CondenserCalculatedPCanvas.Visibility = Visibility.Hidden;
                     break;
             }
         }
 
-        #region TextBoxTextChanged
-
-        //TODO move to only one method
-        private void CondenserV_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CondenserDeltaT_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CompressorCapacityTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CompressorUTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CompressorITextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CondenserT1_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CondenserT2_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
-
-        private void CondenserP_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            GUIChecks.ReplaceDot(sender, e);
-        }
+        #region Text Box events
 
         private void TextBoxOnChange(object sender, TextChangedEventArgs e)
         {
             GUIChecks.ReplaceDot(sender, e);
         }
 
-        //TODO to all the textboxes
         private void TextBoxTextPreview(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !GUIChecks.IsTextAllowedForDouble(e.Text);
+        }
+
+        private void TextBoxTextPreviewNonNegative(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !GUIChecks.IsTextAllowedForDoubleNonNegative(e.Text);
+        }
+
+        private void TextBoxKeyDownPreview(object sender, KeyEventArgs e)
+        {
+            e.Handled = !GUIChecks.IsSpaceAllowed(e);
         }
 
         #endregion
@@ -296,12 +270,6 @@ namespace MainGUI
 
         private void RealTimeModeMeasurementBtn_Click(object sender, RoutedEventArgs e)
         {
-            /*if (_realTimeMeasurementWindow != null && _realTimeMeasurementWindow.IsVisible)
-            {
-                _realTimeMeasurementWindow.Activate();
-                return;
-            }*/
-
             _realTimeMeasurementWindow = new RealTimeMeasurementWindow();
             _realTimeMeasurementWindow.Show();
         }

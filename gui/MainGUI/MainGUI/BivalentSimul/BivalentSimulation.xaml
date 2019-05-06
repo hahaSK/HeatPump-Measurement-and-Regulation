@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:MainGUI"
         mc:Ignorable="d"
-        Title="BivalentSimulation" Height="600" Width="1000">
+        Title="BivalentSimulation" Height="600" Width="1000" ResizeMode="CanMinimize">
     <StackPanel local:EnterKeyTraversal.IsEnabled="True">
         <Grid Height="570">
             <Canvas Margin="43.494,19.04,780.673,486.167">

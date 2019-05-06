@@ -59,7 +59,7 @@ namespace MainGUI.RealTimeMeasurement
 
             if (data.Length < 13)
             {
-                //TODO print error that some value of data was not present
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("Wrong data format in: " + fileName);
                 return new Tuple<bool, MeasurementData>(false, _measurementData);
             }
 
@@ -71,78 +71,78 @@ namespace MainGUI.RealTimeMeasurement
             int i = 0;
             if (!double.TryParse(data[i++], out _measurementData.Tc1))
             {
-                ErrorPrinting.PrintError("couldn't parse Tc1. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse Tc1. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.Tc2))
             {
-                ErrorPrinting.PrintError("couldn't parse Tc2. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse Tc2. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.Tc3))
             {
-                ErrorPrinting.PrintError("couldn't parse Tc3. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse Tc3. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.Tc4))
             {
-                ErrorPrinting.PrintError("couldn't parse Tc4. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse Tc4. " + data[i]);
                 readSuccessful = false;
             }
 
             // air temperature
             if (!double.TryParse(data[i++], out _measurementData.TinA))
             {
-                ErrorPrinting.PrintError("couldn't parse TinA. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse TinA. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.ToutA))
             {
-                ErrorPrinting.PrintError("couldn't parse ToutA. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse ToutA. " + data[i]);
                 readSuccessful = false;
             }
 
             // water temperature
             if (!double.TryParse(data[i++], out _measurementData.TinW))
             {
-                ErrorPrinting.PrintError("couldn't parse TinW. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse TinW. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.ToutW))
             {
-                ErrorPrinting.PrintError("couldn't parse ToutW. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse ToutW. " + data[i]);
                 readSuccessful = false;
             }
 
             // water flow
             if (!double.TryParse(data[i++], out _measurementData.v))
             {
-                ErrorPrinting.PrintError("couldn't parse v. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse v. " + data[i]);
                 readSuccessful = false;
             }
 
             // temperature of water in barrel
             if (!double.TryParse(data[i++], out _measurementData.Tvn))
             {
-                ErrorPrinting.PrintError("couldn't parse Tan. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse Tan. " + data[i]);
                 readSuccessful = false;
             }
 
             // I and U
             if (!double.TryParse(data[i++], out _measurementData.I))
             {
-                ErrorPrinting.PrintError("couldn't parse I. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse I. " + data[i]);
                 readSuccessful = false;
             }
             if (!double.TryParse(data[i++], out _measurementData.U))
             {
-                ErrorPrinting.PrintError("couldn't parse U. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("couldn't parse U. " + data[i]);
                 readSuccessful = false;
             }
 
             if (!double.TryParse(data[i++], out _measurementData.COP))
             {
-                ErrorPrinting.PrintError("Couldn't parse COP. " + data[i]);
+                realTimeMeasurementWindow.ConsoleManager.ConsoleWriteMessage("Couldn't parse COP. " + data[i]);
                 readSuccessful = false;
             }
 

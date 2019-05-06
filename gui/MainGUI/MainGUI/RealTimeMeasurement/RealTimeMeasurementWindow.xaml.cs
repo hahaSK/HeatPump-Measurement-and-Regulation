@@ -19,20 +19,23 @@ namespace MainGUI.RealTimeMeasurement
         private readonly RealTimeMeasurementData _realTimeMeasurementData;
         private readonly ConsoleManager _consoleManager;
         private readonly SystemCalculation _systemCalculation = new SystemCalculation();
+        private readonly GraphsManager _graphsManager;
+        private readonly EnergyConsumption _energyConsumption = new EnergyConsumption();
 
         private readonly Timer _loadFileTimer = new Timer();
 
         private bool _simulating = false;
         private string _fileName;
         private bool _evaporatorIsChecked;
+        private uint _timeElapsed, _interval;
 
         public RealTimeMeasurementWindow()
         {
             InitializeComponent();
             _consoleManager = new ConsoleManager(ConsoleTextBox);
-            //InitConsoleManager(ConsoleTextBox);
 
             _realTimeMeasurementData = new RealTimeMeasurementData(this);
+            _graphsManager = new GraphsManager(EnergyConsumpsionGraph);
 
             CalculateEvaporatorChkbox_Clicked(this, new RoutedEventArgs());
         }
@@ -42,11 +45,6 @@ namespace MainGUI.RealTimeMeasurement
             _loadFileTimer.Stop();
             _loadFileTimer.Close();
         }
-
-        /*private static void InitConsoleManager(TextBox console)
-        {
-            
-        }*/
 
         private void ChooseFileBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -59,7 +57,7 @@ namespace MainGUI.RealTimeMeasurement
         private void StartStopSimulationBtn_Click(object sender, RoutedEventArgs e)
         {
             // checking the input parameters
-            if (!GUIChecks.TryGetValue(LoadIntervalTextBox, out uint interval))
+            if (!GUIChecks.TryGetValue(LoadIntervalTextBox, out _interval))
                 return;
 
             if (_fileName == string.Empty || !File.Exists(_fileName))
@@ -68,14 +66,14 @@ namespace MainGUI.RealTimeMeasurement
                 return;
             }
 
-            if (interval == 0)
+            if (_interval == 0)
             {
                 ConsoleManager.ConsoleWriteMessage("Interval cannot be 0. Setting it to 1!");
-                interval = 1;
+                _interval = 1;
             }
 
             if (!_simulating)
-                StartSimulation(interval);
+                StartSimulation(_interval);
             else if (_simulating)
                 StopSimulation();
 
@@ -86,8 +84,11 @@ namespace MainGUI.RealTimeMeasurement
         {
             StartStopSimulationBtn.Content = "Stop";
             ChooseFileBtn.IsEnabled = false;
+            LoadIntervalTextBox.IsReadOnly = true;
 
             _consoleManager.ClearConsole();
+            _timeElapsed = 0;
+            _graphsManager.ClearGraphs();
 
             // in milliseconds
             _loadFileTimer.Interval = interval * 1000;
@@ -101,8 +102,16 @@ namespace MainGUI.RealTimeMeasurement
             if (!result.Item1)
                 return;
 
+            _timeElapsed += _interval;
+
             DataToUi(result.Item2);
             CalculateCOP(result.Item2);
+
+            // calculate energy consumption and add point to the graph
+            double consumption = _energyConsumption.AddValue(_timeElapsed, result.Item2);
+            EnergyConsumptionTextBox.Dispatcher.Invoke(() =>
+                EnergyConsumptionTextBox.Text = consumption.ToString("F1"));
+            _graphsManager.EnergyConsumptionNewPoint(_timeElapsed, consumption);
 
             if (_evaporatorIsChecked)
                 CalculateEvaporator(result.Item2);
@@ -153,7 +162,8 @@ namespace MainGUI.RealTimeMeasurement
                 return;
             }
 
-            _systemCalculation.EvaporatorData = new CoilData( null, measurementData.TinA - measurementData.ToutA, measurementData.TinA);
+            _systemCalculation.EvaporatorData =
+                new CoilData(null, measurementData.TinA - measurementData.ToutA, measurementData.TinA);
             double? result = _systemCalculation.CalculateEvaporator(humidity, height, evaporatorV);
             EvaporatorPTextBox.Dispatcher.Invoke(() => EvaporatorPTextBox.Text = result.ToString());
         }
@@ -161,6 +171,9 @@ namespace MainGUI.RealTimeMeasurement
         private void StopSimulation()
         {
             _loadFileTimer.Stop();
+            _loadFileTimer.Close();
+            _loadFileTimer.Elapsed -= TimerElapsed;
+            LoadIntervalTextBox.IsReadOnly = false;
 
             StartStopSimulationBtn.Content = "Start";
             ChooseFileBtn.IsEnabled = true;
@@ -209,7 +222,7 @@ namespace MainGUI.RealTimeMeasurement
 
         private void TextBoxTextPreview(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = !GUIChecks.IsTextAllowedForDouble(e.Text);
+            e.Handled = !GUIChecks.IsTextAllowedForDoubleNonNegative(e.Text);
         }
 
         private void TextBoxKeyDownPreview(object sender, KeyEventArgs e)
@@ -230,6 +243,31 @@ namespace MainGUI.RealTimeMeasurement
                     EvaporatorPCanvas.Visibility = HeightOverSeaCanvas.Visibility = Visibility.Hidden;
 
             _evaporatorIsChecked = CalculateEvaporatorChkbox.IsChecked.Value;
+        }
+
+        private void ResetViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            _graphsManager.ResetView();
+        }
+
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (Tab.SelectedIndex)
+            {
+                // Data window
+                case 0:
+                    DataCanvas.Dispatcher.Invoke(() => DataCanvas.Visibility = Visibility.Visible);
+                    GraphsCanvas.Dispatcher.Invoke(() => GraphsCanvas.Visibility = Visibility.Hidden);
+                    break;
+                // Graphs window
+                case 1:
+                    DataCanvas.Dispatcher.Invoke(() => DataCanvas.Visibility = Visibility.Hidden);
+                    GraphsCanvas.Dispatcher.Invoke(() => GraphsCanvas.Visibility = Visibility.Visible);
+                    break;
+
+                default:
+                    throw new NotImplementedException("Tab selection not implemented.");
+            }
         }
     }
 }

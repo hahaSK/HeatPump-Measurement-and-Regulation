@@ -96,7 +96,10 @@
     <Compile Include="ElectricalAppliance.cs" />
     <Compile Include="EnterKeyTraversal.cs" />
     <Compile Include="Extensions\PopUpExtensions.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="RealTimeMeasurement\ConsoleManager.cs" />
+    <Compile Include="RealTimeMeasurement\EnergyConsumption.cs" />
+    <Compile Include="RealTimeMeasurement\GraphsManager.cs" />
     <Compile Include="RealTimeMeasurement\RealTimeMeasurementData.cs" />
     <Compile Include="RealTimeMeasurement\RealTimeMeasurementWindow.xaml.cs">
       <DependentUpon>RealTimeMeasurementWindow.xaml</DependentUpon>

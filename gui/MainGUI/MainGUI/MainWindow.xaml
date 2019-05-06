@@ -6,12 +6,12 @@
     xmlns:local="clr-namespace:MainGUI"
     xmlns:pc="http://schemas.microsoft.com/prototyping/2010/controls" xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Name="MainForm" x:Class="MainGUI.MainWindow"
     mc:Ignorable="d"
-    Title="MainWindow" Height="840" Width="1024">
+    Title="MainWindow" Height="650" Width="1024" ResizeMode="CanMinimize">
     <Grid>
         <Button x:Name="Calc" Content="Calc" HorizontalAlignment="Left" Margin="685.75,481.833,0,0" VerticalAlignment="Top"
                 Width="75" Click="Calc_Click" />
         <TextBox x:Name="SystemCOPResultTextBox" HorizontalAlignment="Left" Height="23" Margin="11.913,548.86,0,0" TextWrapping="Wrap"
-                 Text="Result" VerticalAlignment="Top" Width="54.667" IsReadOnly="True" />
+                 Text="" VerticalAlignment="Top" Width="54.667" IsReadOnly="True" />
         <Label Content="COP" HorizontalAlignment="Left" Margin="11.913,522.9,0,0" VerticalAlignment="Top" Width="54.667"
                RenderTransformOrigin="0.542,3.808" />
 
@@ -21,13 +21,13 @@
             <Canvas x:Name="CompressorCapacityCanvas" Height="43.46" Canvas.Top="25" Width="71" d:IsHidden="False">
                 <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Canvas.Left="16" />
                 <TextBox x:Name="CompressorCapacityTextBox" HorizontalAlignment="Center" Height="20" TextWrapping="Wrap"
-                         Text="20" VerticalAlignment="Center" Width="37.5" Canvas.Top="23.46" Canvas.Left="17.5" TextChanged="CompressorCapacityTextBox_TextChanged" PreviewTextInput="TextBoxTextPreview" />
+                         Text="800" VerticalAlignment="Center" Width="37.5" Canvas.Top="23.46" Canvas.Left="17.5" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
             </Canvas>
             <Canvas x:Name="CompressorUICanvas" Height="45.96" Canvas.Top="22.5" Width="71" d:IsHidden="True">
-                <TextBox x:Name="CompressorUTextBox" Height="20" TextWrapping="Wrap" Text="230" Width="33" Canvas.Top="25.96" TextChanged="CompressorUTextBox_OnTextChanged" />
+                <TextBox x:Name="CompressorUTextBox" Height="20" TextWrapping="Wrap" Text="230" Width="33" Canvas.Top="25.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="U [V]" />
                 <TextBox x:Name="CompressorITextBox" Height="20" TextWrapping="Wrap" Text="5" Width="33" Canvas.Top="25.96"
-                         Canvas.Left="38" TextChanged="CompressorITextBox_OnTextChanged" />
+                         Canvas.Left="38" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="I [A]" Canvas.Left="38" />
             </Canvas>
         </Canvas>
@@ -37,28 +37,28 @@
                       Height="20" Width="66" />
             <Canvas x:Name="T1T2Canvas" Height="134.637" Canvas.Left="5.693" Canvas.Top="25" Width="45.237"
                     d:IsHidden="True">
-                <TextBox x:Name="CondenserT1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="20"
-                         VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserT1_OnTextChanged" />
+                <TextBox x:Name="CondenserT1" HorizontalAlignment="Left" Height="28" TextWrapping="Wrap" Text="20"
+                         VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="Tin,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBox x:Name="CondenserT2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="15"
-                         VerticalAlignment="Top" Width="45.237" Canvas.Top="111.637" TextChanged="CondenserT2_OnTextChanged" />
+                <TextBox x:Name="CondenserT2" HorizontalAlignment="Left" Height="26" TextWrapping="Wrap" Text="15"
+                         VerticalAlignment="Top" Width="45.237" Canvas.Top="111.637" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="Tout,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="85.677" />
             </Canvas>
             <Canvas x:Name="DeltaTCanvas" Height="48.96" Canvas.Top="71.333" Width="45.237">
                 <TextBox x:Name="CondenserDeltaT" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="5"
-                         VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" />
+                         VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="∆T [-]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
             <Canvas x:Name="CondenserVCanvas" Height="48.961" Canvas.Left="70.693" Canvas.Top="71.333" Width="54.557">
-                <TextBox x:Name="CondenserV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2"
-                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="CondenserV_TextChanged" />
+                <TextBox x:Name="CondenserV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0,5"
+                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <ComboBox x:Name="CondFlowUnitOptions" SelectionChanged="CondDataOptions_SelectionChanged" SelectedIndex="0"
                 Height="22" Canvas.Left="59.557" Canvas.Top="26.961" Width="66" />
                 <Label Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
             <Canvas x:Name="CondenserPCanvas" Height="48.96" Canvas.Top="71.333" Width="45.237" d:IsHidden="True">
-                <TextBox x:Name="CondenserP" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="20"
-                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserP_OnTextChanged" />
+                <TextBox x:Name="CondenserP" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" />
                 <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
         </Canvas>
@@ -187,36 +187,41 @@
             <CheckBox x:Name="CalculateEvaporatorChkbox" Content=" Evaporator" HorizontalAlignment="Left" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Top" Width="76.92" Canvas.Left="103.413" Canvas.Top="10" Click="CalculateEvaporatorChkbox_Clicked"/>
             <Canvas x:Name="EvaporatorPCanvas" Height="48.96" Canvas.Left="283.095" Canvas.Top="75.999" Width="45.238">
                 <TextBox x:Name="EvaporatorResultP" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" IsReadOnly="True"
-                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="CondenserDeltaT_TextChanged" Canvas.Left="0.001" />
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" Canvas.Left="0.001" />
                 <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
             <Canvas x:Name="EvaporatorTCanvas" Height="137.707" Canvas.Top="30.96" Width="45.237" Canvas.Left="63">
-                <TextBox x:Name="EvaporatorTin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="16"
-                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" />
+                <TextBox x:Name="EvaporatorTin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="20"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="Tin,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                <TextBox x:Name="EvaporatorTout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="10"
-                    VerticalAlignment="Top" Width="45.237" Canvas.Top="104.707" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" />
+                <TextBox x:Name="EvaporatorTout" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="14"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="104.707" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="Tout,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="78.747" />
             </Canvas>
             <Canvas x:Name="EvaporatorVCanvas" Height="48.961" Canvas.Top="75.999" Width="54.557">
-                <TextBox x:Name="EvaporatorV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000"
-                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreview" />
+                <TextBox x:Name="EvaporatorV" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="500"
+                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" TextChanged="TextBoxOnChange" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <ComboBox x:Name="EvapFlowUnitOptions" SelectionChanged="CondDataOptions_SelectionChanged" SelectedIndex="0"
                     Height="22" Canvas.Left="-79.443" Canvas.Top="25.961" Width="66" />
                 <Label Content="V" HorizontalAlignment="Left" VerticalAlignment="Top" />
             </Canvas>
             <Canvas x:Name="EvaporatorHumidityCanvas" Height="48.96" Width="45.238">
                 <TextBox x:Name="EvaporatorHumidity" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
-                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreview" />
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
                 <Label Content="Humidity [%]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-16" />
             </Canvas>
         </Canvas>
         <Canvas x:Name="HeightOverSeaCanvas" Margin="92,45,879,715">
             <TextBox x:Name="HeightOverSea" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
-                VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreview" />
+                VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreviewNonNegative" PreviewKeyDown="TextBoxKeyDownPreview" />
             <Label Content="Height over sea [m]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-32" />
         </Canvas>
         <Button x:Name="ShowBivalentSimulationWindowBtn" Content="Bivalent simulation" HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" Margin="685.75,558.87,0,0" Click="ShowBivalentSimulationWindowButton_Click"/>
         <Button x:Name="RealTimeModeMeasurementBtn" Content="Real Time Model Measurement" HorizontalAlignment="Left" VerticalAlignment="Top" Width="178" Margin="685.75,583.83,0,0" Click="RealTimeModeMeasurementBtn_Click"/>
+        <Canvas x:Name="CondenserCalculatedPCanvas" Margin="571.699,259.883,399.063,310.157">
+            <TextBox x:Name="CondenserPResultTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" IsReadOnly="True"
+                VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" Canvas.Left="0.001" />
+            <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        </Canvas>
     </Grid>
 </Window>
