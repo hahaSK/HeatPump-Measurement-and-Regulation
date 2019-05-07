@@ -26,7 +26,9 @@ namespace MainGUI
             PePercentageLabel.Visibility = Visibility.Hidden;
             PhePercentageLabel.Visibility = Visibility.Hidden;
 
-            PricePercentageLabel.Content = "";
+            PricePercentageLabel.Content = NpePercentageLabel.Content = TotalCostsPercentageLabel.Content = "";
+
+            EconomicsTab.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -47,7 +49,20 @@ namespace MainGUI
             CompareCapacities(otherSysPhe, otherSysPe);
             CompareCOP(otherSysCOP);
 
-            CompareEconomics(otherSysPe);
+            switch (EconomicsTab.SelectedIndex)
+            {
+                // simple economics
+                case 0:
+                    CompareSimpleEconomics(otherSysPe);
+                    break;
+                case 1:
+                    CompareAdvancedEconomics();
+                    break;
+
+                default:
+                    throw new NotImplementedException("Economics option not implemented.");
+            }
+
 
             return true;
         }
@@ -66,74 +81,21 @@ namespace MainGUI
         private void CompareCapacities(double otherSysPhe, double otherSysPe)
         {
             // Electrical consumption [W]
-
-            if (Math.Abs(SystemCalculation.GetSysPe - otherSysPe) < 0.001)
-            {
-                PePercentageLabel.Content = "=";
-                ThisSystemPeResultTextbox.Background = OtherSystemPeResultTextbox.Background = Brushes.White;
-            }
-            else if (SystemCalculation.GetSysPe > otherSysPe)
-            {
-                ThisSystemPeResultTextbox.Background = Brushes.Red;
-                OtherSystemPeResultTextbox.Background = Brushes.Green;
-                PePercentageLabel.Content =
-                    "> " + Math.Round((SystemCalculation.GetSysPe / otherSysPe - 1) * 100, 3) + " %";
-            }
-            else if (SystemCalculation.GetSysPe < otherSysPe)
-            {
-                ThisSystemPeResultTextbox.Background = Brushes.Green;
-                OtherSystemPeResultTextbox.Background = Brushes.Red;
-                PePercentageLabel.Content =
-                    "< " + Math.Round((otherSysPe / SystemCalculation.GetSysPe - 1) * 100, 3) + " %";
-            }
+            SetColors(SystemCalculation.GetSysPe, otherSysPe, ThisSystemPeResultTextbox, OtherSystemPeResultTextbox,
+                PePercentageLabel, true);
 
             // Heat capacity
-
-            if (Math.Abs(SystemCalculation.GetSysPhe - otherSysPhe) < 0.001)
-            {
-                PhePercentageLabel.Content = "=";
-                ThisSystemPheResultTextbox.Background = OtherSystemPheResultTextbox.Background = Brushes.White;
-            }
-            else if (SystemCalculation.GetSysPhe > otherSysPhe)
-            {
-                ThisSystemPheResultTextbox.Background = Brushes.Green;
-                OtherSystemPheResultTextbox.Background = Brushes.Red;
-                PhePercentageLabel.Content =
-                    "> " + Math.Round((SystemCalculation.GetSysPhe / otherSysPhe - 1) * 100, 3) + " %";
-            }
-            else if (SystemCalculation.GetSysPhe < otherSysPhe)
-            {
-                ThisSystemPheResultTextbox.Background = Brushes.Red;
-                OtherSystemPheResultTextbox.Background = Brushes.Green;
-                PhePercentageLabel.Content =
-                    "< " + Math.Round((otherSysPhe / SystemCalculation.GetSysPhe - 1) * 100, 3) + " %";
-            }
+            SetColors(SystemCalculation.GetSysPhe, otherSysPhe, ThisSystemPheResultTextbox, OtherSystemPheResultTextbox,
+                PhePercentageLabel);
         }
 
         private void CompareCOP(double otherSysCOP)
         {
-            if (Math.Abs(SystemCalculation.GetSysCOP - otherSysCOP) < 0.001)
-            {
-                COPPercentageLabel.Content = "=";
-                ThisSystemCOPResultTextbox.Background = OtherSystemCOPResultTextbox.Background = Brushes.White;
-            }
-            else if (SystemCalculation.GetSysCOP > otherSysCOP)
-            {
-                ThisSystemCOPResultTextbox.Background = Brushes.Green;
-                OtherSystemCOPResultTextbox.Background = Brushes.Red;
-                COPPercentageLabel.Content =
-                    "> " + Math.Round((SystemCalculation.GetSysCOP / otherSysCOP - 1) * 100, 3) + " %";
-            }
-            else if (SystemCalculation.GetSysCOP < otherSysCOP)
-            {
-                ThisSystemCOPResultTextbox.Background = Brushes.Red;
-                OtherSystemCOPResultTextbox.Background = Brushes.Green;
-                COPPercentageLabel.Content =
-                    "< " + Math.Round((otherSysCOP / SystemCalculation.GetSysCOP - 1) * 100, 3) + " %";
-            }
+            SetColors(SystemCalculation.GetSysCOP, otherSysCOP, ThisSystemCOPResultTextbox, OtherSystemCOPResultTextbox,
+                COPPercentageLabel);
         }
 
-        private void CompareEconomics(double otherSysPe)
+        private void CompareSimpleEconomics(double otherSysPe)
         {
             if (!GUIChecks.TryGetValue(PriceForkWhTextBox, out double priceForkWh, false))
             {
@@ -149,22 +111,87 @@ namespace MainGUI
             ThisSystemElectricCostsTextBox.Text = thisSysPrice.ToString("F1");
             OtherSystemElectricCostsTextBox.Text = otherSysPrice.ToString("F1");
 
-            if (Math.Abs(thisSysPrice - otherSysPrice) < 0.001)
+            SetColors(thisSysPrice, otherSysPrice, ThisSystemElectricCostsTextBox, OtherSystemElectricCostsTextBox,
+                PricePercentageLabel, true);
+        }
+
+        private void CompareAdvancedEconomics()
+        {
+            if (!GUIChecks.TryGetValue(CeTextBox, out double Ce, false) ||
+                !GUIChecks.TryGetValue(CqTextBox, out double Cq, false) ||
+                !GUIChecks.TryGetValue(QrTextBox, out double Qr, false) ||
+                !GUIChecks.TryGetValue(EfficiencyTextBox, out double efficiency, false) ||
+                !GUIChecks.TryGetValue(ThisSystemNprTextBox, out double thisSysNpr, false) ||
+                !GUIChecks.TryGetValue(ThisSystemINTextBox, out double thisSysIN, false) ||
+                !GUIChecks.TryGetValue(ThisSystemJINTextBox, out double thisSysJIN, false) ||
+                !GUIChecks.TryGetValue(OtherSystemNprTextBox, out double otherSysNpr, false) ||
+                !GUIChecks.TryGetValue(OtherSystemINTextBox, out double otherSysIN, false) ||
+                !GUIChecks.TryGetValue(OtherSystemJINTextBox, out double otherSysJIN, false))
             {
-                PricePercentageLabel.Content = "=";
-                ThisSystemElectricCostsTextBox.Background = OtherSystemElectricCostsTextBox.Background = Brushes.White;
+                NpePercentageLabel.Content = TotalCostsPercentageLabel.Content = "";
+                ThisSystemNpeResultTextBox.Background = OtherSystemNpeResultTextBox.Background = Brushes.White;
+                ThisSystemTotalCostsTextBox.Background = OtherSystemTotalCostsTextBox.Background = Brushes.White;
+                return;
             }
-            else if (thisSysPrice > otherSysPrice)
+
+            // Npe
+            double thisSysNpe = Ce * Qr * (1 / SystemCalculation.GetSysCOP);
+            double otherSysNpe = Cq * Qr * (1 / efficiency);
+
+            SetColors(thisSysNpe, otherSysNpe, ThisSystemNpeResultTextBox, OtherSystemNpeResultTextBox,
+                NpePercentageLabel, true);
+
+            ThisSystemNpeResultTextBox.Text = thisSysNpe.ToString("F1");
+            OtherSystemNpeResultTextBox.Text = otherSysNpe.ToString("F1");
+
+            // total costs
+            double thisSysTotalCosts = thisSysNpe + thisSysIN * thisSysJIN + thisSysNpr;
+            double otherSysTotalCosts = otherSysNpe + otherSysIN * otherSysJIN + otherSysNpr;
+
+            SetColors(thisSysTotalCosts, otherSysTotalCosts, ThisSystemTotalCostsTextBox, OtherSystemTotalCostsTextBox,
+                TotalCostsPercentageLabel, true);
+
+            ThisSystemTotalCostsTextBox.Text = thisSysTotalCosts.ToString("F1");
+            OtherSystemTotalCostsTextBox.Text = otherSysTotalCosts.ToString("F1");
+        }
+
+        private void SetColors(double thisSysValue, double otherSysValue, TextBox thisSysTextBox,
+            TextBox otherSysTextBox, Label percentageLabel, bool invertedColors = false)
+        {
+            if (Math.Abs(thisSysValue - otherSysValue) < 0.001)
             {
-                ThisSystemElectricCostsTextBox.Background = Brushes.Red;
-                OtherSystemElectricCostsTextBox.Background = Brushes.Green;
-                PricePercentageLabel.Content = "> " + Math.Round((thisSysPrice / otherSysPrice - 1) * 100, 3) + " %";
+                percentageLabel.Content = "=";
+                thisSysTextBox.Background = otherSysTextBox.Background = Brushes.White;
             }
-            else if (thisSysPrice < otherSysPrice)
+            else if (thisSysValue > otherSysValue)
             {
-                ThisSystemElectricCostsTextBox.Background = Brushes.Green;
-                OtherSystemElectricCostsTextBox.Background = Brushes.Red;
-                PricePercentageLabel.Content = "< " + Math.Round((otherSysPrice / thisSysPrice - 1) * 100, 3) + " %";
+                if (invertedColors)
+                {
+                    thisSysTextBox.Background = Brushes.Red;
+                    otherSysTextBox.Background = Brushes.Green;
+                }
+                else
+                {
+                    thisSysTextBox.Background = Brushes.Green;
+                    otherSysTextBox.Background = Brushes.Red;
+                }
+
+                percentageLabel.Content = "> " + Math.Round((thisSysValue / otherSysValue - 1) * 100, 3) + " %";
+            }
+            else if (thisSysValue < otherSysValue)
+            {
+                if (invertedColors)
+                {
+                    thisSysTextBox.Background = Brushes.Green;
+                    otherSysTextBox.Background = Brushes.Red;
+                }
+                else
+                {
+                    thisSysTextBox.Background = Brushes.Red;
+                    otherSysTextBox.Background = Brushes.Green;
+                }
+
+                percentageLabel.Content = "< " + Math.Round((otherSysValue / thisSysValue - 1) * 100, 3) + " %";
             }
         }
 
@@ -193,5 +220,24 @@ namespace MainGUI
         }
 
         #endregion
+
+        private void EconomicsTab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (EconomicsTab.SelectedIndex)
+            {
+                // Simple
+                case 0:
+                    SimpleEconomicsCanvas.Visibility = Visibility.Visible;
+                    AdvancedEconomicsCanvas.Visibility = Visibility.Hidden;
+                    break;
+                case 1:
+                    SimpleEconomicsCanvas.Visibility = Visibility.Hidden;
+                    AdvancedEconomicsCanvas.Visibility = Visibility.Visible;
+                    break;
+
+                default:
+                    throw new NotImplementedException("Economics option not implemented.");
+            }
+        }
     }
 }
