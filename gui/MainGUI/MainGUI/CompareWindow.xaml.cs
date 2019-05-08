@@ -55,6 +55,7 @@ namespace MainGUI
                 case 0:
                     CompareSimpleEconomics(otherSysPe);
                     break;
+                // advanced economics
                 case 1:
                     CompareAdvancedEconomics();
                     break;
@@ -230,6 +231,7 @@ namespace MainGUI
                     SimpleEconomicsCanvas.Visibility = Visibility.Visible;
                     AdvancedEconomicsCanvas.Visibility = Visibility.Hidden;
                     break;
+                // Advanced
                 case 1:
                     SimpleEconomicsCanvas.Visibility = Visibility.Hidden;
                     AdvancedEconomicsCanvas.Visibility = Visibility.Visible;
