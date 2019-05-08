@@ -89,6 +89,7 @@ namespace MainGUI.RealTimeMeasurement
             _consoleManager.ClearConsole();
             _timeElapsed = 0;
             _graphsManager.ClearGraphs();
+            _energyConsumption.RestCount();
 
             // in milliseconds
             _loadFileTimer.Interval = interval * 1000;
@@ -110,7 +111,7 @@ namespace MainGUI.RealTimeMeasurement
             // calculate energy consumption and add point to the graph
             double consumption = _energyConsumption.AddValue(_timeElapsed, result.Item2);
             EnergyConsumptionTextBox.Dispatcher.Invoke(() =>
-                EnergyConsumptionTextBox.Text = consumption.ToString("F1"));
+                EnergyConsumptionTextBox.Text = consumption.ToString("F"));
             _graphsManager.EnergyConsumptionNewPoint(_timeElapsed, consumption);
 
             if (_evaporatorIsChecked)
@@ -136,7 +137,7 @@ namespace MainGUI.RealTimeMeasurement
             }
 
             COPCalculatedTextBox.Dispatcher.Invoke(() =>
-                COPCalculatedTextBox.Text = SystemCalculation.GetSysCOP.ToString("F1"));
+                COPCalculatedTextBox.Text = SystemCalculation.GetSysCOP.ToString("F"));
         }
 
         private void CalculateEvaporator(MeasurementData measurementData)
@@ -191,28 +192,28 @@ namespace MainGUI.RealTimeMeasurement
 
         private void DataToUi(MeasurementData measurementData)
         {
-            Tc1TextBox.Dispatcher.Invoke(() => Tc1TextBox.Text = measurementData.Tc1.ToString("F1"));
-            Tc2TextBox.Dispatcher.Invoke(() => Tc2TextBox.Text = measurementData.Tc2.ToString("F1"));
-            Tc3TextBox.Dispatcher.Invoke(() => Tc3TextBox.Text = measurementData.Tc3.ToString("F1"));
-            Tc4TextBox.Dispatcher.Invoke(() => Tc4TextBox.Text = measurementData.Tc4.ToString("F1"));
+            Tc1TextBox.Dispatcher.Invoke(() => Tc1TextBox.Text = measurementData.Tc1.ToString("F"));
+            Tc2TextBox.Dispatcher.Invoke(() => Tc2TextBox.Text = measurementData.Tc2.ToString("F"));
+            Tc3TextBox.Dispatcher.Invoke(() => Tc3TextBox.Text = measurementData.Tc3.ToString("F"));
+            Tc4TextBox.Dispatcher.Invoke(() => Tc4TextBox.Text = measurementData.Tc4.ToString("F"));
 
-            TempAirInTextBox.Dispatcher.Invoke(() => TempAirInTextBox.Text = measurementData.TinA.ToString("F1"));
-            TempAirOutTextBox.Dispatcher.Invoke(() => TempAirOutTextBox.Text = measurementData.ToutA.ToString("F1"));
+            TempAirInTextBox.Dispatcher.Invoke(() => TempAirInTextBox.Text = measurementData.TinA.ToString("F"));
+            TempAirOutTextBox.Dispatcher.Invoke(() => TempAirOutTextBox.Text = measurementData.ToutA.ToString("F"));
 
-            TempWaterInTextBox.Dispatcher.Invoke(() => TempWaterInTextBox.Text = measurementData.TinW.ToString("F1"));
+            TempWaterInTextBox.Dispatcher.Invoke(() => TempWaterInTextBox.Text = measurementData.TinW.ToString("F"));
             TempWaterOutTextBox.Dispatcher.Invoke(() =>
-                TempWaterOutTextBox.Text = measurementData.ToutW.ToString("F1"));
+                TempWaterOutTextBox.Text = measurementData.ToutW.ToString("F"));
 
             WaterTankTemperatureTextBox.Dispatcher.Invoke(() =>
-                WaterTankTemperatureTextBox.Text = measurementData.Tvn.ToString("F1"));
+                WaterTankTemperatureTextBox.Text = measurementData.Tvn.ToString("F"));
 
             WaterVolumeFlowTextBox.Dispatcher.Invoke(() =>
-                WaterVolumeFlowTextBox.Text = measurementData.v.ToString("F1"));
+                WaterVolumeFlowTextBox.Text = measurementData.v.ToString("F"));
 
-            UTextBox.Dispatcher.Invoke(() => UTextBox.Text = measurementData.U.ToString("F1"));
-            ITextBox.Dispatcher.Invoke(() => ITextBox.Text = measurementData.I.ToString("F1"));
+            UTextBox.Dispatcher.Invoke(() => UTextBox.Text = measurementData.U.ToString("F"));
+            ITextBox.Dispatcher.Invoke(() => ITextBox.Text = measurementData.I.ToString("F"));
 
-            COPLoadedTextBox.Dispatcher.Invoke(() => COPLoadedTextBox.Text = measurementData.COP.ToString("F1"));
+            COPLoadedTextBox.Dispatcher.Invoke(() => COPLoadedTextBox.Text = measurementData.COP.ToString("F"));
         }
 
         private void TextBoxOnChange(object sender, TextChangedEventArgs e)

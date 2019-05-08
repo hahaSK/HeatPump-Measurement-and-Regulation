@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MainGUI.RealTimeMeasurement
 {
@@ -19,8 +15,12 @@ namespace MainGUI.RealTimeMeasurement
             _energySum += (capacity / 1000);
             double average = _energySum / _callCount;
             // to kWh
-            return Math.Round(average * (timeElapsed / 3600), 1);
+            return Math.Round(average * (timeElapsed / 3600), 6);
         }
-        
+
+        public void RestCount()
+        {
+            _callCount = 0;
+        }
     }
 }
