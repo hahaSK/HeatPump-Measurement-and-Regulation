@@ -1,0 +1,111 @@
+﻿<Window x:Class="MainGUI.CompareWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainGUI"
+        mc:Ignorable="d"
+        Title="Compare" Height="730" Width="300">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid >
+
+            <Label Content="Other System" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Canvas x:Name="ThisSystemCanvas" Margin="10,10,210.033,444.333">
+                <TextBox x:Name="ThisSystemCOPTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="56.921"/>
+                <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="25.96"/>
+                <TextBox x:Name="ThisSystemPeTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="116.255"/>
+                <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="85.292"/>
+                <TextBox x:Name="ThisSystemPheTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="175.217"/>
+                <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="144.255"/>
+                <Label Content="This System" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+            </Canvas>
+            <Path Data="M110,1 L110.42987,237.21212 110.66667,367.333 110.99951,585.35094" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="215.083" Margin="108,-1,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="5"/>
+            <Canvas x:Name="OtherSystemCanvas" Margin="152,39.706,69.5,444.333">
+                <Canvas x:Name="OtherSysPePheCanvas" Height="119.295" Canvas.Top="63.266" Width="70.5" Canvas.Left="2">
+                    <TextBox x:Name="OtherSystemPeTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="24.129" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative"/>
+                    <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="-6.834"/>
+                    <TextBox x:Name="OtherSystemPheTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" Canvas.Top="81" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative"/>
+                    <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="50"/>
+
+                </Canvas>
+
+            </Canvas>
+            <Path Data="M1,234 L292,233.66667" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="4.333" Margin="-1,209.75,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="295"/>
+            <Button Content="Compare" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="209,667.251,0,0" Click="Button_Click"/>
+            <Canvas x:Name="ThisSystemResultCanvas" Margin="13.467,219.083,210.033,275.622">
+                <TextBox x:Name="ThisSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
+                <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
+                <TextBox x:Name="ThisSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
+                <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
+                <TextBox x:Name="ThisSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="153.553"/>
+                <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="122.59"/>
+            </Canvas>
+            <Label Content="Results" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90.499,221.458,0,0" FontWeight="Bold"/>
+            <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="30.08" Margin="110.333,273.378,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4"/>
+            <Canvas x:Name="OtherSystemResultCanvas" Margin="178.8,216.416,42.7,275.622">
+                <TextBox x:Name="OtherSystemPeResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="30.962"/>
+                <Label Content="Pe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5"/>
+                <TextBox x:Name="OtherSystemPheResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="89.924"/>
+                <Label Content="Phe [W]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="58.962"/>
+                <TextBox x:Name="OtherSystemCOPResultTextbox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="155.962"/>
+                <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="125"/>
+            </Canvas>
+            <Label x:Name="PePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="88.967,247.418,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="PhePercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="88.967,305.918,0,0" VerticalAlignment="Top"/>
+            <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="32.54" Margin="110.333,336.878,0,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4"/>
+            <Label x:Name="COPPercentageLabel" Content="Label" HorizontalAlignment="Left" Margin="88.967,369.418,0,0" VerticalAlignment="Top"/>
+            <Path Data="M1,234 L292,233.66667" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="4.333" Margin="0,400.378,-1,0" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="295"/>
+            <Label Content="Economic" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90.499,406.253,0,0" FontWeight="Bold"/>
+            <Canvas x:Name="SimpleEconomicsCanvas" Margin="10,437.213,13.467,153.158" d:IsHidden="True">
+                <Label Content="Price for kWh" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="75.5"/>
+                <TextBox x:Name="PriceForkWhTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="4,5" VerticalAlignment="Top" Width="70.5" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="81.757" Canvas.Top="25.96"/>
+                <TextBox x:Name="ThisSystemElectricCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="57.629"/>
+                <Label x:Name="PricePercentageLabel" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="75.5" Canvas.Top="54.669"/>
+                <TextBox x:Name="OtherSystemElectricCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Left="162.532" Canvas.Top="57.629"/>
+            </Canvas>
+            <TabControl x:Name="EconomicsTab" HorizontalAlignment="Left" Height="26" Margin="165.238,406.213,0,0" VerticalAlignment="Top" Width="118.762" SelectionChanged="EconomicsTab_SelectionChanged">
+                <TabItem Header="Simple">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+                <TabItem Header="Advanced">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+            <Canvas x:Name="AdvancedEconomicsCanvas" Margin="4.879,437.213,10,83.749">
+                <Label Content="Ce" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="41.59" ToolTip="price for electric energy [currency / Wh]"/>
+                <TextBox x:Name="CeTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="830" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="41.59" Canvas.Top="25.96" ToolTip="price for electric energy [currency / Wh]"/>
+                <Label Content="Cq" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="88.423" ToolTip="price of heat in fuel [currency / Wh]"/>
+                <TextBox x:Name="CqTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="750" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="88.423" Canvas.Top="25.96" ToolTip="price of heat in fuel [currency / Wh]"/>
+                <Label Content="QR" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="135.256" ToolTip="annual heat supply [W⋅h]"/>
+                <TextBox x:Name="QrTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="18" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="135.256" Canvas.Top="25.96" ToolTip="annual heat supply [W⋅h]"/>
+                <Label Content="𝜂k" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="182.089" ToolTip="efficiency of other heat system [-]"/>
+                <TextBox x:Name="EfficiencyTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0,9" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="182.089" Canvas.Top="25.96" ToolTip="efficiency of other heat system [-]"/>
+                <Label Content="Npr" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="50.626" ToolTip="annual operating costs without fuel and energy costs [currency]"/>
+                <TextBox x:Name="ThisSystemNprTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1200" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="0.001" Canvas.Top="76.587" ToolTip="annual operating costs without fuel and energy costs [currency]"/>
+                <Label Content="IN" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="46.833" Canvas.Top="50.626" ToolTip="investment costs [currency]"/>
+                <TextBox x:Name="ThisSystemINTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="30000" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="46.834" Canvas.Top="76.587" ToolTip="investment costs [currency]"/>
+                <Label Content="JIN" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="93.666" Canvas.Top="50.626" ToolTip="share of one-time investment costs (depreciation) [currency]"/>
+                <TextBox x:Name="ThisSystemJINTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="93.667" Canvas.Top="76.587" ToolTip="share of one-time investment costs (depreciation) [currency]"/>
+                <TextBox x:Name="ThisSystemNpeResultTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="135.55" Canvas.Left="4.76" ToolTip="annual fuel and energy costs"/>
+                <Label Content="Npe [currency]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="95.293" Canvas.Top="104.587" Canvas.Left="4.76" ToolTip="annual fuel and energy costs"/>
+                <Label x:Name="NpePercentageLabel" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="80.621" Canvas.Top="135.704"/>
+                <TextBox x:Name="OtherSystemNpeResultTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="135.55" Canvas.Left="175.422" ToolTip="annual fuel and energy costs"/>
+                <Label Content="Npe [currency]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93.699" Canvas.Top="104.587" Canvas.Left="175.422" ToolTip="annual fuel and energy costs"/>
+                <TextBox x:Name="ThisSystemTotalCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="194.513" Canvas.Left="4.76"/>
+                <Label Content="Total Costs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="163.55" Canvas.Left="4.76"/>
+                <Label x:Name="TotalCostsPercentageLabel" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="80.621" Canvas.Top="194.667"/>
+                <TextBox x:Name="OtherSystemTotalCostsTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="70.5" IsReadOnly="True" Canvas.Top="194.513" Canvas.Left="175.422"/>
+                <Label Content="Total Costs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="70.5" Canvas.Top="163.55" Canvas.Left="175.422"/>
+                <Label Content="Npr" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="143.621" Canvas.Top="50.626" ToolTip="annual operating costs without fuel and energy costs [currency]"/>
+                <TextBox x:Name="OtherSystemNprTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2000" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="143.622" Canvas.Top="76.587" ToolTip="annual operating costs without fuel and energy costs [currency]"/>
+                <Label Content="IN" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="190.454" Canvas.Top="50.626" ToolTip="investment costs [currency]"/>
+                <TextBox x:Name="OtherSystemINTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="25000" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="190.455" Canvas.Top="76.587" ToolTip="investment costs [currency]"/>
+                <Label Content="JIN" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="237.287" Canvas.Top="50.626" ToolTip="share of one-time investment costs (depreciation) [currency]"/>
+                <TextBox x:Name="OtherSystemJINTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="41.833" TextChanged="OnTextBoxChange" PreviewKeyDown="TextBoxKeyDownPreview" PreviewTextInput="TextBoxTextPreviewNonNegative" Canvas.Left="237.288" Canvas.Top="76.587" ToolTip="share of one-time investment costs (depreciation) [currency]"/>
+                <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="74" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4" Canvas.Left="137.719" Canvas.Top="56.547"/>
+                <Path Data="M112.33333,266.94408 L112.33367,376.41617" Fill="#FF0F2DEA" HorizontalAlignment="Left" Height="32.21" Stretch="Fill" Stroke="Black" StrokeThickness="4" VerticalAlignment="Top" Width="4" Canvas.Left="137.719" Canvas.Top="163.55"/>
+            </Canvas>
+
+        </Grid>
+    </ScrollViewer>
+</Window>

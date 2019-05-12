@@ -1,5 +1,7 @@
-#ifndef HEATPUMP_MEASUREMENT_AND_REGULATION_LIBRARY_H
-#define HEATPUMP_MEASUREMENT_AND_REGULATION_LIBRARY_H
+#ifndef LIBRARY_H
+#define LIBRARY_H
+
+#define DllEXPORT extern "C" __declspec(dllexport)
 
 #define DllEXPORT extern "C" __declspec(dllexport)
 
@@ -14,7 +16,7 @@ DllEXPORT double CalculateCOP(double Phe, double Pe);
 /**
  * Calculates the Heat Capacity of given substance
  * @param Qm mass flow rate [kg/s]
- * @param Cp thermal capacity of given substance [J/KgK]
+ * @param Cp specific thermal capacity of given substance [J/KgK]
  * @param DeltaT temperature difference [K]
  * @return <strong>Phe</strong> - Heat Capacity [W]
  */
@@ -23,7 +25,7 @@ DllEXPORT double CalculatePhe(double Qm, double Cp, double DeltaT);
 /**
  * Calculates the Heat Capacity ofc given substance
  * @param Qm mass flow rate [kg/s]
- * @param Cp thermal capacity of given substance [J/KgK]
+ * @param Cp specific thermal capacity of given substance [J/KgK]
  * @param T1 temperature [T] or [°C]
  * @param T2 temperature [T] or [°C]
  * @return <strong>Phe</strong> - Heat Capacity [W]

@@ -1,0 +1,253 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainGUI.RealTimeMeasurement"
+        xmlns:pc="http://schemas.microsoft.com/prototyping/2010/controls" xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" x:Class="MainGUI.RealTimeMeasurement.RealTimeMeasurementWindow"
+        mc:Ignorable="d"
+        Title="RealTimeMeasurement" Height="700" Width="1000" ResizeMode="CanMinimize">
+    <Grid>
+        <Label x:Name="PathLabel" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" BorderBrush="Black" Background="#FFE6E6E6"/>
+        <Button x:Name="ChooseFileBtn" Content="Choose file" HorizontalAlignment="Left" Margin="10,40.96,0,0" VerticalAlignment="Top" Width="75" Click="ChooseFileBtn_Click"/>
+        <Canvas x:Name="ConsoleCanvas" HorizontalAlignment="Left" Height="100" Margin="10,543.983,0,0" VerticalAlignment="Top" Width="972">
+            <TextBox x:Name="ConsoleTextBox" Height="100" TextWrapping="NoWrap" Width="972" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#FFE6E6E6" IsReadOnly="True" FontSize="11"/>
+        </Canvas>
+        <Button x:Name="StartStopSimulationBtn" Content="Start" HorizontalAlignment="Left" Margin="90,40.96,0,0" VerticalAlignment="Top" Width="75" Click="StartStopSimulationBtn_Click"/>
+        <TextBox x:Name="LoadIntervalTextBox" HorizontalAlignment="Left" Height="19.96" Margin="290.467,40.96,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="52" PreviewTextInput="LoadIntervalTextBox_PreviewTextInput" PreviewKeyDown="LoadIntervalTextBox_PreviewKeyDown"/>
+        <Label Content="Load data interval [s]:" HorizontalAlignment="Left" Margin="170,36.96,0,0" VerticalAlignment="Top" Height="28.96"/>
+        <Canvas x:Name="DataCanvas" Margin="30.443,79.09,76,148.117">
+            <Canvas x:Name="SystemCanvas" Height="360.333" Canvas.Left="148.761" Canvas.Top="81.46" Width="559.763">
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="143.5" Stroke="Black"
+                    VerticalAlignment="Top" Width="80" Canvas.Left="58.9" Canvas.Top="87" />
+                <Path Data="M145.83333,521.5 L130,500.5 188.5,477.5 123.5,456.5 183,436 126,415.5 173.5,390.5 154,379"
+                    Fill="#FFF4F5F5" HorizontalAlignment="Left" Height="143.5" Stretch="Fill" VerticalAlignment="Top"
+                    Width="66" Canvas.Left="65.233" Canvas.Top="87">
+                    <Path.Stroke>
+                        <LinearGradientBrush EndPoint="0.529,0.973" StartPoint="0.5,0">
+                            <GradientStop Color="Red" Offset="0" />
+                            <GradientStop Color="Blue" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Stroke>
+                </Path>
+                <pc:SketchCircleUC HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="60" FontSize="10"
+                    Canvas.Left="245.567" />
+                <Path Data="M292.66667,342.33333 L338.16632,328.83368" Fill="#FFF4F4F5" HorizontalAlignment="Left"
+                    Height="14.5" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="46.5"
+                    Canvas.Left="256.567" Canvas.Top="36.833" />
+                <Path Data="M289.75033,303.6253 L337.83368,309.83368" Fill="#FFF4F4F5" HorizontalAlignment="Left"
+                    Height="7.208" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="49.083"
+                    Canvas.Left="253.65" Canvas.Top="11.625" />
+                <Path Data="M132.75,379.75 L132.83366,318.99966 283.75,319" HorizontalAlignment="Left" Height="61.542"
+                    Stretch="Fill" Stroke="Red" VerticalAlignment="Top" Width="150.876" Canvas.Left="95.983"
+                    Canvas.Top="26.458" />
+                <Path Data="M207.47917,318.375 L201.5,311.75" HorizontalAlignment="Left" Height="7.625" Stretch="Fill"
+                    Stroke="Red" VerticalAlignment="Top" Width="6.979" StrokeThickness="0.5" Canvas.Left="165.4"
+                    Canvas.Top="19.75" />
+                <Path Data="M207.56219,318.43784 L201.62516,323.79192" HorizontalAlignment="Left" Height="6.355"
+                    Stretch="Fill" Stroke="Red" VerticalAlignment="Top" Width="6.938" StrokeThickness="0.5"
+                    Canvas.Left="165.525" Canvas.Top="26.437" />
+                <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="143.5" Stroke="Black"
+                    VerticalAlignment="Top" Width="80" Canvas.Left="413.4" Canvas.Top="87.433" />
+                <Path
+                    Data="M252.08501,435.33301 L183,436 127.16792,456.16626 182.45951,477.92692 125.835,500.49943 182.835,518.49967 250.58501,518.58271"
+                    HorizontalAlignment="Left" Height="84.25" Stretch="Fill" VerticalAlignment="Top" Width="127.25"
+                    Canvas.Left="424.734" Canvas.Top="114.433">
+                    <Path.Stroke>
+                        <LinearGradientBrush EndPoint="0.529,0.973" StartPoint="0.5,0">
+                            <GradientStop Color="#FFA00000" Offset="0" />
+                            <GradientStop Color="#FF4225F3" Offset="1" />
+                        </LinearGradientBrush>
+                    </Path.Stroke>
+                </Path>
+                <Path Data="M124.33111,311.43983 L118.35194,304.81483" HorizontalAlignment="Left" Height="7.625"
+                    Stretch="Fill" Stroke="#FFA00000" VerticalAlignment="Top" Width="6.979" StrokeThickness="0.5"
+                    RenderTransformOrigin="0.5,0.5" Canvas.Left="426.634" Canvas.Top="20.958" />
+                <Path Data="M290.65018,325.25833 L284.71315,330.61241" HorizontalAlignment="Left" Height="6.355"
+                    Stretch="Fill" Stroke="#FFA00000" VerticalAlignment="Top" Width="6.938" StrokeThickness="0.5"
+                    RenderTransformOrigin="0.5,0.5" Canvas.Left="426.759" Canvas.Top="27.645">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform Angle="180" />
+                            <TranslateTransform X="1.7763568394002505E-15" />
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+                <Path Data="M533.75,379.75 L534.5,319.5 340,320" HorizontalAlignment="Left" Height="61.25" Stretch="Fill"
+                    VerticalAlignment="Top" Width="151.166" Stroke="#FFA00000" Canvas.Left="303.9" Canvas.Top="27.5" />
+                <Path Data="M535.41667,522 L536.16605,596.16766 359.57164,595.83399" HorizontalAlignment="Left"
+                    Height="75.5" Stretch="Fill" VerticalAlignment="Top" Width="131.666" Stroke="#FF4225F3"
+                    Canvas.Left="323.4" Canvas.Top="230" />
+                <Rectangle Fill="#FFF4F5F5" HorizontalAlignment="Left" Height="29.166" VerticalAlignment="Top"
+                    Width="84.833" Stroke="Black" Canvas.Left="239.9" Canvas.Top="289.667" />
+                <Path Data="M123.33333,521.66667 L123.33333,595.83302 276.167,596.50001" HorizontalAlignment="Left"
+                    Height="75.833" Stretch="Fill" Stroke="#FF4225F3" VerticalAlignment="Top" Width="153.834"
+                    Canvas.Left="87.233" Canvas.Top="229.667" />
+                <Path Data="M360.5,582 L275.75,596.5" Fill="#FFF4F5F5" HorizontalAlignment="Left" Height="15.5"
+                    Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="85.75" Canvas.Left="239.65"
+                    Canvas.Top="290" />
+                <Path Data="M360,609.75 L276.5,596.75" Fill="#FFF4F5F5" HorizontalAlignment="Left" Height="14"
+                    Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="84.5" Canvas.Left="240.4"
+                    Canvas.Top="304.75" />
+                <Rectangle HorizontalAlignment="Left" Height="11.583" VerticalAlignment="Top" Width="28" Stroke="Black"
+                    StrokeThickness="0.8" Canvas.Left="0.65" Canvas.Top="118.25">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="1,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+                            <GradientStop Color="#FFEA0F0F" Offset="1" />
+                            <GradientStop Color="#FFE2C9C9" />
+                            <GradientStop Color="#FF973939" Offset="0.339" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Path Data="M63.599996,403.10001 L63.85,427.225 76.600069,416.35 z" HorizontalAlignment="Left"
+                    Height="24.925" Stretch="Fill" Stroke="Black" StrokeThickness="0.8" VerticalAlignment="Top"
+                    Width="13.8" Fill="Red" Canvas.Left="27.5" Canvas.Top="111.1" />
+                <Rectangle HorizontalAlignment="Left" Height="11.583" VerticalAlignment="Top" Width="28" Stroke="Black"
+                    StrokeThickness="0.8" RenderTransformOrigin="0.5,0.5" Canvas.Left="12.9" Canvas.Top="195.225">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1" />
+                            <SkewTransform AngleY="0" AngleX="0" />
+                            <RotateTransform Angle="0" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="1,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+                            <GradientStop Color="#FF0F2DEA" Offset="1" />
+                            <GradientStop Color="#FFE2C9C9" />
+                            <GradientStop Color="#FF394A97" Offset="0.339" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Path Data="M63.599996,403.10001 L63.85,427.225 76.600069,416.35 z" HorizontalAlignment="Left"
+                    Height="24.925" Stretch="Fill" Stroke="Black" StrokeThickness="0.8" VerticalAlignment="Top"
+                    Width="13.8" Fill="#FF0F2DEA" RenderTransformOrigin="0.5,0.5" Canvas.Top="188.325">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="1" ScaleX="-1" />
+                            <SkewTransform AngleY="0" AngleX="0" />
+                            <RotateTransform Angle="0" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+                <CheckBox x:Name="CalculateEvaporatorChkbox" Content=" Evaporator" HorizontalAlignment="Left" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Top" Width="76.92" Canvas.Left="-35.62" Canvas.Top="72.04" Click="CalculateEvaporatorChkbox_Clicked"/>
+            </Canvas>
+            <Canvas x:Name="Tc1Canvas" Height="0" Canvas.Left="293.524" Canvas.Top="47" Width="51.5">
+                <TextBox x:Name="Tc1TextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tc1 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="Tc2Canvas" Height="0" Canvas.Left="501.524" Canvas.Top="47" Width="50.5">
+                <TextBox x:Name="Tc2TextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tc2 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="Tc3Canvas" Height="0" Canvas.Left="501.524" Canvas.Top="393.343" Width="50.5">
+                <TextBox x:Name="Tc3TextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tc3 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="Tc4Canvas" Height="0" Canvas.Left="293.524" Canvas.Top="393.343" Width="51.5">
+                <TextBox x:Name="Tc4TextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tc4 [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="TempAirInCanvas" Height="0" Canvas.Left="85.524" Canvas.Top="169.343" Width="49.5">
+                <TextBox x:Name="TempAirInTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tin,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="TempAirOutCanvas" Height="0" Canvas.Left="85.524" Canvas.Top="246.343" Width="49.5">
+                <TextBox x:Name="TempAirOutTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tout,A [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="TempWaterInCanvas" Height="0" Canvas.Left="713.524" Canvas.Top="169.343" Width="49.533">
+                <TextBox x:Name="TempWaterInTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tin,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="TempWaterOutCanvas" Height="0" Canvas.Left="713.524" Canvas.Top="246.343" Width="49.533">
+                <TextBox x:Name="TempWaterOutTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tout,W [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="WaterVolumeFlowCanvas" Height="0" Canvas.Left="800.057" Canvas.Top="200.353" Width="49.5">
+                <TextBox x:Name="WaterVolumeFlowTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="v [cm3/s]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Rectangle x:Name="WaterTank" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="124.5" Stroke="Black"
+                VerticalAlignment="Top" Width="80" Canvas.Left="790.557" Canvas.Top="303.893" />
+            <Canvas x:Name="WaterTankTemperatureCanvas" Height="0" Canvas.Left="807.057" Canvas.Top="343.853" Width="49.5">
+                <TextBox x:Name="WaterTankTemperatureTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Tan [°C]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="UCanvas" Height="47" Canvas.Left="350.024" Width="51.5">
+                <TextBox x:Name="UTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="U [V]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="ICanvas" Height="0" Canvas.Left="445.024" Width="51.5">
+                <TextBox x:Name="ITextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="I [A]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="EvaporatorVCanvas" Height="48.961" Canvas.Top="212.909" Width="54.557">
+                <TextBox x:Name="EvaporatorVTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="1"
+                    VerticalAlignment="Top" Width="54.557" Canvas.Top="25.961" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
+                <Label Content="v [m3/s]" HorizontalAlignment="Left" VerticalAlignment="Top" Width="54.557" />
+            </Canvas>
+            <Canvas x:Name="EvaporatorHumidityCanvas" Height="48.96" Canvas.Top="81.46" Width="45.238">
+                <TextBox x:Name="EvaporatorHumidity" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
+                <Label Content="Humidity [%]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-16" />
+            </Canvas>
+            <Canvas x:Name="HeightOverSeaCanvas" Height="49" Canvas.Left="120.057" Canvas.Top="81.42" Width="45">
+                <TextBox x:Name="HeightOverSea" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="0"
+                    VerticalAlignment="Top" Width="45.237" Canvas.Top="25.96" TextChanged="TextBoxOnChange" Canvas.Left="0.001" PreviewTextInput="TextBoxTextPreview" PreviewKeyDown="TextBoxKeyDownPreview" />
+                <Label Content="Height over sea [m]" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="-32" />
+            </Canvas>
+            <Canvas x:Name="COPCalculatedCanvas" Height="47" Canvas.Left="368.384" Canvas.Top="269.05" Width="51.5">
+                <TextBox x:Name="COPCalculatedTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Calculated" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Label Content="COP [-]" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Canvas.Left="413.917" Canvas.Top="240"/>
+            <Canvas x:Name="COPLoadedCanvas" Height="47" Canvas.Left="461.917" Canvas.Top="269.05" Width="51.5">
+                <TextBox x:Name="COPLoadedTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="Loaded" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="EvaporatorPCanvas" Height="47" Canvas.Left="313.024" Canvas.Top="212.909" Width="51.5">
+                <TextBox x:Name="EvaporatorPTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="25.96" IsReadOnly="True"/>
+                <Label Content="P [W]" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Canvas>
+            <Canvas x:Name="EnergyConsumptionCanvas" Height="76.93" Canvas.Left="413.917" Canvas.Top="153.5" Width="75.733">
+                <TextBlock TextWrapping="Wrap" FontWeight="Bold"><Run Text="Energy"/><LineBreak/><Run Text="Consumption"/><LineBreak/><Run Text="[kWh]"/></TextBlock>
+                <TextBox x:Name="EnergyConsumptionTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49.5" Canvas.Top="53.93" IsReadOnly="True"/>
+            </Canvas>
+        </Canvas>
+        <Canvas x:Name="GraphsCanvas" HorizontalAlignment="Left" Height="436.473" VerticalAlignment="Top" Width="972" Margin="10,102.51,0,0" d:IsHidden="True">
+            <Wpf:CartesianChart x:Name="EnergyConsumpsionGraph" Height="426.473" Width="464" Zoom="Xy" Pan="Xy" DisableAnimations="True" ZoomingSpeed="30">
+                <Wpf:CartesianChart.AxisY>
+                    <Wpf:Axis Title="Energy Consumption [kWh]">
+                        <Wpf:Axis.Separator>
+                            <Wpf:Separator Stroke="#FF7C7A7A" StrokeDashArray="4 2"/>
+                        </Wpf:Axis.Separator>
+                    </Wpf:Axis>
+                </Wpf:CartesianChart.AxisY>
+                <Wpf:CartesianChart.AxisX>
+                    <Wpf:Axis Title="Time [s]">
+                        <Wpf:Axis.Separator>
+                            <Wpf:Separator Stroke="#FF7C7A7A" StrokeDashArray="4 2"/>
+                        </Wpf:Axis.Separator>
+                    </Wpf:Axis>
+                </Wpf:CartesianChart.AxisX>
+                <Wpf:CartesianChart.Series>
+                    <Wpf:LineSeries Title="Energy Consumption"/>
+                </Wpf:CartesianChart.Series>
+            </Wpf:CartesianChart>
+            <Button x:Name="ResetViewButton" Content="Reset view" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="ResetViewButton_Click" Canvas.Left="418" Canvas.Top="-19.96"/>
+        </Canvas>
+        <TabControl x:Name="Tab" HorizontalAlignment="Left" Height="31.59" Margin="10,65.92,0,0" VerticalAlignment="Top" Width="90.667" SelectionChanged="Tab_SelectionChanged">
+            <TabItem x:Name="DataWindow" Header="Data">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem x:Name="GraphWindow" Header="Graphs">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
