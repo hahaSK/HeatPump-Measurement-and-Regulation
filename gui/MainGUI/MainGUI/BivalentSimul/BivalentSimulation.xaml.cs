@@ -28,11 +28,11 @@ namespace MainGUI
         private readonly BivalentUtilization _bivalentUtilization = new BivalentUtilization();
         private Mode _mode = Mode.Monovalent;
 
-        private bool isInitializing;
+        private readonly bool _isInitializing;
 
         public BivalentSimulation()
         {
-            isInitializing = true;
+            _isInitializing = true;
             InitializeComponent();
 
             _bivalentGraph.heatLossChanged += OnHeatLossChanged;
@@ -73,7 +73,7 @@ namespace MainGUI
 
             _bivalentGraph.DrawCurrentHeatLoss(BivalentPointChart, CurrentTempSlider.Value);
 
-            isInitializing = false;
+            _isInitializing = false;
         }
 
         private void RedrawGraph()
@@ -92,6 +92,9 @@ namespace MainGUI
             _bivalentGraph.DrawCurrentHeatLoss(BivalentPointChart, CurrentTempSlider.Value);
         }
 
+        /// <summary>
+        /// Set schema according to mode
+        /// </summary>
         private void SetModeSchema()
         {
             if (_mode == Mode.Monovalent)
@@ -254,7 +257,7 @@ namespace MainGUI
 
         private void CalculateUtilization()
         {
-            if (isInitializing)
+            if (_isInitializing)
                 return;
             if (!GUIChecks.TryGetValue(CurrentHeatLossTextBox, out _bivalentUtilization.CurrentHeatLoss) ||
                 !GUIChecks.TryGetValue(HeatPumpMaxCapacityTextBox, out _bivalentUtilization.HeatPumpMaxCapacity) ||
@@ -295,6 +298,7 @@ namespace MainGUI
                 HeatPumpUtilizationTextBox.ToolTip = null;
             }
 
+            // additional heat source
             AdditionalHeatSourceUtilizationTextBox.Background = utilization.Item2 > 100 ? Brushes.Red : Brushes.White;
 
             AdditionalHeatSourceUtilizationTextBox.Text = utilization.Item2.ToString("F1");

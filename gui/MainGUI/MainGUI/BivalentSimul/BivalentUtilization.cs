@@ -2,6 +2,9 @@
 
 namespace MainGUI
 {
+    /// <summary>
+    /// Class calculates utilization of system.
+    /// </summary>
     public class BivalentUtilization
     {
         public bool HeatPumpOff { get; private set; }

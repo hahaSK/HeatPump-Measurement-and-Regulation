@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
@@ -57,6 +55,11 @@ namespace MainGUI
             PointGeometry = DefaultGeometries.Cross
         };
 
+        /// <summary>
+        /// Redrawing graph
+        /// </summary>
+        /// <param name="graph">graph to redraw</param>
+        /// <param name="simulationMode"></param>
         public void RedrawGraph(CartesianChart graph, BivalentSimulation.Mode simulationMode)
         {
             //TODO check if the input makes sense like MAX > MIN etc...
@@ -124,6 +127,7 @@ namespace MainGUI
             if (graph.Series == null)
                 return;
 
+            // calculate the crossing point
             double yValue = HeatLossCoefficient * (ZeroLoadTemp - currentAmbientTemp);
             if (yValue < 0)
                 yValue = 0;

@@ -91,7 +91,7 @@ namespace MainGUI.RealTimeMeasurement
             _graphsManager.ClearGraphs();
             _energyConsumption.RestCount();
 
-            // in milliseconds
+            // milliseconds to seconds
             _loadFileTimer.Interval = interval * 1000;
             _loadFileTimer.Elapsed += TimerElapsed;
             _loadFileTimer.Start();
